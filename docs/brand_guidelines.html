@@ -77,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-f938f6e5ca7bfbd6305a7d1113a49c1d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-6981099a390373030692f28b2b5ccda0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-84fa721f727adb22b45a30e8eb990c00.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -782,8 +782,61 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Always include <code>fig-alt</code> alt text for accessibility</li>
 </ul>
 </section>
-<section id="code-blocks" class="level3" data-number="15.5">
-<h3 data-number="15.5" class="anchored" data-anchor-id="code-blocks"><span class="header-section-number">15.5</span> Code blocks</h3>
+<section id="interactive-html-components" class="level3" data-number="15.5">
+<h3 data-number="15.5" class="anchored" data-anchor-id="interactive-html-components"><span class="header-section-number">15.5</span> Interactive HTML components</h3>
+<section id="glossary-tooltips" class="level4" data-number="15.5.1">
+<h4 data-number="15.5.1" class="anchored" data-anchor-id="glossary-tooltips"><span class="header-section-number">15.5.1</span> Glossary tooltips</h4>
+<ul>
+<li>Tooltip background: <code>#FFFFFF</code> (white) — must contrast against the parchment (<code>#F4F1EC</code>) page background</li>
+<li>Border: <code>1px solid rgba(93, 40, 144, 0.25)</code> — subtle indigo_velvet tint</li>
+<li>Shadow: <code>0 4px 12px rgba(0, 0, 0, 0.12)</code> — lifts the tooltip visually off the page</li>
+<li>The CSS is emitted by <code>nastaveni-slovnik</code> chunk; the <code>glossary_style()</code> call must use <code>def_bg = "#FFFFFF"</code></li>
+</ul>
+</section>
+<section id="tabsets-.panel-tabset" class="level4" data-number="15.5.2">
+<h4 data-number="15.5.2" class="anchored" data-anchor-id="tabsets-.panel-tabset"><span class="header-section-number">15.5.2</span> Tabsets (<code>.panel-tabset</code>)</h4>
+<p>Tab button states use existing colour tokens to give clear click affordance against the parchment background:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 40%">
+<col style="width: 16%">
+<col style="width: 24%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>State</th>
+<th>Background</th>
+<th>Text</th>
+<th>Border</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Inactive</td>
+<td><code>light_gray</code> (<code>#F0EDE8</code>)</td>
+<td><code>graphite</code></td>
+<td><code>rgba(0,0,0,0.12)</code></td>
+</tr>
+<tr class="even">
+<td>Hover</td>
+<td><code>amethyst</code> (<code>#86579E</code>)</td>
+<td>white</td>
+<td><code>amethyst</code></td>
+</tr>
+<tr class="odd">
+<td>Active</td>
+<td><code>indigo_velvet</code> (<code>#5D2890</code>)</td>
+<td>white</td>
+<td><code>indigo_velvet</code></td>
+</tr>
+</tbody>
+</table>
+<p>This styling is generated automatically by <code>generate_skripta_html_theme.R</code> and must not be overridden manually.</p>
+</section>
+</section>
+<section id="code-blocks" class="level3" data-number="15.6">
+<h3 data-number="15.6" class="anchored" data-anchor-id="code-blocks"><span class="header-section-number">15.6</span> Code blocks</h3>
 <ul>
 <li>Student-visible chunks (<code>echo: true</code>): base R, no prefixes for preloaded packages</li>
 <li>Hidden setup chunks (<code>echo: false</code>): tidyverse with full namespace (<code>pkg::fn()</code>)</li>

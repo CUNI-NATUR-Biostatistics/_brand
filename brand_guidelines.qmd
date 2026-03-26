@@ -546,6 +546,27 @@ Avoid `tip` and `caution` to limit visual variety. Do not invent new callout typ
 - Default width: `out.width = "80%"` for HTML; `out.width = "100%"` for Typst/PDF
 - Always include `fig-alt` alt text for accessibility
 
+### Interactive HTML components
+
+#### Glossary tooltips
+
+- Tooltip background: `#FFFFFF` (white) — must contrast against the parchment (`#F4F1EC`) page background
+- Border: `1px solid rgba(93, 40, 144, 0.25)` — subtle indigo_velvet tint
+- Shadow: `0 4px 12px rgba(0, 0, 0, 0.12)` — lifts the tooltip visually off the page
+- The CSS is emitted by `nastaveni-slovnik` chunk; the `glossary_style()` call must use `def_bg = "#FFFFFF"`
+
+#### Tabsets (`.panel-tabset`)
+
+Tab button states use existing colour tokens to give clear click affordance against the parchment background:
+
+| State | Background | Text | Border |
+| ----- | ---------- | ---- | ------ |
+| Inactive | `light_gray` (`#F0EDE8`) | `graphite` | `rgba(0,0,0,0.12)` |
+| Hover | `amethyst` (`#86579E`) | white | `amethyst` |
+| Active | `indigo_velvet` (`#5D2890`) | white | `indigo_velvet` |
+
+This styling is generated automatically by `generate_skripta_html_theme.R` and must not be overridden manually.
+
 ### Code blocks
 
 - Student-visible chunks (`echo: true`): base R, no prefixes for preloaded packages

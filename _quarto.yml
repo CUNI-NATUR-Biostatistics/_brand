@@ -1,6 +1,8 @@
 project:
   type: website
   output-dir: docs
+  pre-render:
+    - Rscript R/generate_theme_brand.R
 
 website:
   title: "Biostatistika — Brand Guidelines"
