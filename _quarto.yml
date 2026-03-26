@@ -1,0 +1,26 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Biostatistika — Brand Guidelines"
+  navbar:
+    left:
+      - href: brand_guidelines.qmd
+        text: Guidelines
+  page-footer:
+    left: "© 2026 CUNI-NATUR-Biostatistics"
+    right:
+      - icon: github
+        href: https://github.com/CUNI-NATUR-Biostatistics/_brand
+
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    toc-title: "Contents"
+    number-sections: true
+    embed-resources: false
+    theme: [flatly, theme/brand_theme.scss]
+    highlight-style: github
+    include-in-header: "theme/fonts-include.html"

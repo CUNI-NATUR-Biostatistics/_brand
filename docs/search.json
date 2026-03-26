@@ -1,0 +1,128 @@
+[
+  {
+    "objectID": "brand_guidelines.html",
+    "href": "brand_guidelines.html",
+    "title": "Visual Identity Guide — Biostatistika (MB120P163)",
+    "section": "",
+    "text": "This document defines the visual identity system for the course Biostatistika (MB120P163) at the Faculty of Science, Charles University.\nThe goal is to ensure:\n\nconceptual clarity (data vs model vs interpretation)\nvisual consistency across all outputs\nlow cognitive load for students\n\n\n\nAll student-facing content — axis labels, callout headings, interaction prompts, figure captions, slide text, and annotations — must be in Czech. This is a hard requirement, not a preference. The only exceptions are:\n\nR function names, package names, and error messages (remain in English)\nInternal technical documentation and README files (English — read by collaborators, not students)\nInline R code spans and code blocks"
+  },
+  {
+    "objectID": "brand_guidelines.html#purpose",
+    "href": "brand_guidelines.html#purpose",
+    "title": "Visual Identity Guide — Biostatistika (MB120P163)",
+    "section": "",
+    "text": "This document defines the visual identity system for the course Biostatistika (MB120P163) at the Faculty of Science, Charles University.\nThe goal is to ensure:\n\nconceptual clarity (data vs model vs interpretation)\nvisual consistency across all outputs\nlow cognitive load for students\n\n\n\nAll student-facing content — axis labels, callout headings, interaction prompts, figure captions, slide text, and annotations — must be in Czech. This is a hard requirement, not a preference. The only exceptions are:\n\nR function names, package names, and error messages (remain in English)\nInternal technical documentation and README files (English — read by collaborators, not students)\nInline R code spans and code blocks"
+  },
+  {
+    "objectID": "brand_guidelines.html#core-design-philosophy",
+    "href": "brand_guidelines.html#core-design-philosophy",
+    "title": "Visual Identity Guide — Biostatistika (MB120P163)",
+    "section": "2 Core Design Philosophy",
+    "text": "2 Core Design Philosophy\nThe visual system encodes epistemic roles:\n\nData (observations) → neutral, grey\nModel (inference) → purple\nInterpretation / emphasis → orange\n\nColour is not decorative. It conveys meaning.\n\n2.1 Connection to the pedagogical sequence\nThe colour order mirrors the course’s canonical teaching sequence:\n\n\n\nStep\nWhat happens\nColour\n\n\n\n\n1\nBiological question is posed\n— (no data yet)\n\n\n2\nData are shown\ngrey\n\n\n3\nStudents predict / interpret\n— (question slide)\n\n\n4\nStatistical result is revealed\npurple\n\n\n5\nResult is interpreted biologically\norange\n\n\n\nA figure that uses these colours in the correct semantic roles therefore mirrors the analytical workflow students are being trained to follow. This is the primary justification for treating colour as meaning rather than decoration."
+  },
+  {
+    "objectID": "brand_guidelines.html#colour-palette",
+    "href": "brand_guidelines.html#colour-palette",
+    "title": "Visual Identity Guide — Biostatistika (MB120P163)",
+    "section": "3 Colour Palette",
+    "text": "3 Colour Palette\nThe canonical palette is defined in quarto/colors.json. Every lecture repo downloads this file at render time.\n\n3.1 Base colours\n\nparchment (#F4F1EC) — background\ngraphite (#2E2E2E) — primary text\n\n\n\n3.2 Neutral / Data layer\n\ngrey_olive (#8A8A8A) — data points, gridlines\n\n\n\n3.3 Model layer (primary accent)\n\nindigo_velvet (#5D2890) — main model\namethyst (#86579E) — secondary model / comparison\n\n\n\n3.4 Highlight layer\n\norange (#F3A712) — emphasis, key results\n\n\n\n3.5 Live colour swatches"
+  },
+  {
+    "objectID": "brand_guidelines.html#semantic-mapping-mandatory",
+    "href": "brand_guidelines.html#semantic-mapping-mandatory",
+    "title": "Visual Identity Guide — Biostatistika (MB120P163)",
+    "section": "4 Semantic Mapping (MANDATORY)",
+    "text": "4 Semantic Mapping (MANDATORY)\n\n\n\n\n\n\n\n\n\nRole\nColour name\nHex value\nUsage\n\n\n\n\nData\ngrey_olive\n#8A8A8A\nraw observations, background structure\n\n\nModel (primary)\nindigo_velvet\n#5D2890\nmain fitted curve, main inference\n\n\nModel (secondary)\namethyst\n#86579E\nalternative models, comparisons\n\n\nHighlight\norange\n#F3A712\nkey insight, important value, warning\n\n\n\nRules:\n\nGrey is always data\nPurple family is always modelling\nOrange is used sparingly for emphasis"
+  },
+  {
+    "objectID": "brand_guidelines.html#usage-rules",
+    "href": "brand_guidelines.html#usage-rules",
+    "title": "Visual Identity Guide — Biostatistika (MB120P163)",
+    "section": "5 Usage Rules",
+    "text": "5 Usage Rules\n\n5.1 General\n\nUse maximum 3 colours per figure\nMaintain strong contrast hierarchy\nPrefer restraint over expressiveness\n\n\n\n5.2 Data (points)\n\nColour: grey_olive\nAlpha: 0.2–0.4\nSize: small\n\n\n\n5.3 Models (lines)\n\nPrimary model: indigo_velvet\nSecondary model: amethyst\nLine width: slightly thicker than default\n\n\n\n5.4 Highlights\nUse orange only for:\n\nkey datapoints\nannotated regions\nimportant labels\n\nDo NOT:\n\ncolour entire plots orange\nuse orange for decorative purposes\n\n\n\n5.5 Uncertainty\n\nUse transparency of purple (alpha = 0.15)\nOr lighter amethyst\nAvoid introducing new colours"
+  },
+  {
+    "objectID": "brand_guidelines.html#typography",
+    "href": "brand_guidelines.html#typography",
+    "title": "Visual Identity Guide — Biostatistika (MB120P163)",
+    "section": "6 Typography",
+    "text": "6 Typography\nFont definitions are in quarto/fonts.json.\n\n6.1 Primary (sans-serif)\n\nBody: Inter (weights 400, 500, 700)\nHeadings: Source Sans 3 (weights 400, 600, 700)\n\n\n\n6.2 Monospace\n\nJetBrains Mono; fallback: Fira Code\n\nUsage:\n\nMonospace for code, formulas, filenames\nOptional: purple accent (indigo_velvet) for model formulas"
+  },
+  {
+    "objectID": "brand_guidelines.html#layout-principles",
+    "href": "brand_guidelines.html#layout-principles",
+    "title": "Visual Identity Guide — Biostatistika (MB120P163)",
+    "section": "7 Layout Principles",
+    "text": "7 Layout Principles\n\nLeft-aligned layouts\nGenerous whitespace\nOne main visual per slide\n\nOptional structural motif:\n\nThin vertical purple line for consistent framing"
+  },
+  {
+    "objectID": "brand_guidelines.html#figure-design-pattern",
+    "href": "brand_guidelines.html#figure-design-pattern",
+    "title": "Visual Identity Guide — Biostatistika (MB120P163)",
+    "section": "8 Figure Design Pattern",
+    "text": "8 Figure Design Pattern\nStandard layer order:\n\nGrey points (data)\nPurple curve (model)\nOptional secondary curve (amethyst)\nOrange highlight (if needed)\n\nThis order reflects the analytical workflow (§2.1).\n\n8.1 Biological framing requirement\nEvery figure in a student-facing context must be anchored in a concrete biological or ecological question.\nRequired:\n\nCaption or slide narrative states the biological question the figure addresses (e.g. “Závisí délka křídla na druhu tučňáka?”)\nAxis labels use ecologically meaningful Czech names with units — never raw column names\nAnnotations (if orange) explain the biological significance, not just the statistical value\n\nA figure is complete only when a student could answer “what biological question does this address?” from the figure and its caption alone."
+  },
+  {
+    "objectID": "brand_guidelines.html#ggplot2-implementation",
+    "href": "brand_guidelines.html#ggplot2-implementation",
+    "title": "Visual Identity Guide — Biostatistika (MB120P163)",
+    "section": "9 ggplot2 Implementation",
+    "text": "9 ggplot2 Implementation\n\n9.1 Named colour constants\nDefine these at the top of every setup chunk and reuse throughout:\nclr_data      &lt;- \"#8A8A8A\"   # grey_olive    — raw observations\nclr_model     &lt;- \"#5D2890\"   # indigo_velvet — primary model\nclr_model2    &lt;- \"#86579E\"   # amethyst      — secondary model / comparison\nclr_highlight &lt;- \"#F3A712\"   # orange        — emphasis / key result\nclr_bg        &lt;- \"#F4F1EC\"   # parchment     — plot background\n\n\n9.2 Standard course ggplot2 theme (theme_biostat)\nEvery figure must end with + theme_biostat(). Define this function once in each lecture’s R/set_r_theme.R (generated automatically by R/generate_theme.R).\nReference implementation:\ntheme_biostat &lt;- function() {\n  ggplot2::theme_minimal(base_family = \"Source Sans 3\") +\n    ggplot2::theme(\n      plot.background   = ggplot2::element_rect(fill = \"#F4F1EC\", colour = NA),\n      panel.background  = ggplot2::element_rect(fill = \"#F4F1EC\", colour = NA),\n      panel.grid.major  = ggplot2::element_line(colour = \"#E0DDD8\"),\n      panel.grid.minor  = ggplot2::element_blank(),\n      axis.text         = ggplot2::element_text(colour = \"#2E2E2E\"),\n      axis.title        = ggplot2::element_text(colour = \"#2E2E2E\"),\n      plot.title        = ggplot2::element_text(colour = \"#2E2E2E\", face = \"bold\"),\n      legend.background = ggplot2::element_rect(fill = \"#F4F1EC\", colour = NA)\n    )\n}\n\n\nExample: scatter plot (data only)\n\n# Synthetic data for illustration\nset.seed(1)\nn &lt;- 80\nexample_df &lt;-\n  tibble::tibble(\n    x = rnorm(n, mean = 20, sd = 5),\n    y = 0.8 * x + rnorm(n, sd = 3)\n  )\n\nggplot2::ggplot(\n  example_df,\n  ggplot2::aes(x = x, y = y)\n) +\n  ggplot2::geom_point(\n    colour = clr_data,\n    alpha  = 0.35,\n    size   = 2\n  ) +\n  ggplot2::labs(\n    x     = \"Predictor variable (units)\",\n    y     = \"Response variable (units)\",\n    title = \"Data only — grey points on parchment\"\n  ) +\n  ggplot2::theme_minimal(base_family = \"sans\") +\n  ggplot2::theme(\n    plot.background  = ggplot2::element_rect(fill = clr_bg, colour = NA),\n    panel.background = ggplot2::element_rect(fill = clr_bg, colour = NA),\n    panel.grid.major = ggplot2::element_line(colour = \"#E0DDD8\"),\n    panel.grid.minor = ggplot2::element_blank()\n  )\n\n\n\n\n\n\n\n\n\n\nExample: scatter + fitted model\n\nggplot2::ggplot(\n  example_df,\n  ggplot2::aes(x = x, y = y)\n) +\n  ggplot2::geom_point(\n    colour = clr_data,\n    alpha  = 0.35,\n    size   = 2\n  ) +\n  ggplot2::geom_smooth(\n    method    = \"lm\",\n    colour    = clr_model,\n    linewidth = 1.2,\n    se        = FALSE,\n    formula   = y ~ x\n  ) +\n  ggplot2::labs(\n    x     = \"Predictor variable (units)\",\n    y     = \"Response variable (units)\",\n    title = \"Data (grey) + model (purple)\"\n  ) +\n  ggplot2::theme_minimal(base_family = \"sans\") +\n  ggplot2::theme(\n    plot.background  = ggplot2::element_rect(fill = clr_bg, colour = NA),\n    panel.background = ggplot2::element_rect(fill = clr_bg, colour = NA),\n    panel.grid.major = ggplot2::element_line(colour = \"#E0DDD8\"),\n    panel.grid.minor = ggplot2::element_blank()\n  )"
+  },
+  {
+    "objectID": "brand_guidelines.html#consistency-rules",
+    "href": "brand_guidelines.html#consistency-rules",
+    "title": "Visual Identity Guide — Biostatistika (MB120P163)",
+    "section": "10 Consistency Rules",
+    "text": "10 Consistency Rules\n\nDo not reassign colour meanings\nDo not introduce new hues without justification\nMaintain consistency across lectures and materials"
+  },
+  {
+    "objectID": "brand_guidelines.html#guiding-principle",
+    "href": "brand_guidelines.html#guiding-principle",
+    "title": "Visual Identity Guide — Biostatistika (MB120P163)",
+    "section": "11 Guiding Principle",
+    "text": "11 Guiding Principle\n\nColour encodes epistemic status, not category.\n\n\ngrey → observed\npurple → modelled\norange → interpreted"
+  },
+  {
+    "objectID": "brand_guidelines.html#default-decision-rules",
+    "href": "brand_guidelines.html#default-decision-rules",
+    "title": "Visual Identity Guide — Biostatistika (MB120P163)",
+    "section": "12 Default Decision Rules",
+    "text": "12 Default Decision Rules\nUse the following defaults unless there is a strong reason to deviate:\n\nMap data to grey (grey_olive)\nMap the primary model to indigo_velvet\nUse amethyst only for secondary comparison\nUse orange only for deliberate emphasis\nLimit each figure to the smallest viable palette\nPrefer minimalism, consistency, and semantic clarity\n\nSafe default (for most figures): grey points + purple model + no accent colour."
+  },
+  {
+    "objectID": "brand_guidelines.html#future-extensions",
+    "href": "brand_guidelines.html#future-extensions",
+    "title": "Visual Identity Guide — Biostatistika (MB120P163)",
+    "section": "13 Future Extensions",
+    "text": "13 Future Extensions\nPossible controlled extensions:\n\nline types for additional models (instead of adding colours)\ntransparency gradients for density\nannotations instead of additional colours\n\nAvoid expanding the palette unless strictly necessary."
+  },
+  {
+    "objectID": "brand_guidelines.html#presentations-quarto-revealjs",
+    "href": "brand_guidelines.html#presentations-quarto-revealjs",
+    "title": "Visual Identity Guide — Biostatistika (MB120P163)",
+    "section": "14 Presentations (Quarto RevealJS)",
+    "text": "14 Presentations (Quarto RevealJS)\n\n14.1 Slide background and theme\n\nBackground colour: parchment (#F4F1EC)\nPrimary text: graphite (#2E2E2E)\nCode highlight style: github-light (consistent with parchment background)\n\n\n\n14.2 Typography on slides\n\nHeadings: Source Sans 3 or Inter, bold\nBody: same sans-serif family at regular weight\nCode: JetBrains Mono or Fira Code\nDo NOT use more than one heading weight per slide\n\n\n\n14.3 Colour use in slide text and callouts\n\nUse indigo_velvet for highlighted model formulas or key statistical terms — apply sparingly\nUse orange for “question” labels, key-result callout borders, or “important” boxes\nDo NOT colour regular prose text for decoration\nCallout with left purple border = supplementary explanation; orange border = call to attention\n\n\n\n14.4 Figure density\n\nOne figure per slide is the default\nTwo-column layout is allowed for: side-by-side model comparisons, before/after reveals, data vs model overlays\nNever place more than two distinct figures on a single slide\n\n\n\n14.5 Progressive disclosure\n\nReveal layers in this order: data (grey) → model (purple) → interpretation (orange callout)\nUse RevealJS fragments or incremental list options\nNever show a model result before posing a prediction question to the audience\n\n\n\n14.6 Interaction slides\n\nMark interaction slides with a thick indigo_velvet left border or a distinct callout block\nThe word “Otázka” or “Diskuze” can be accented in orange\nKeep ALL interaction slides visually consistent within a single lecture\n\n\n\n14.7 Code display on slides\n\nKeep visible code chunks to ≤ 8 lines; scrolling is acceptable for demos\nCode output inherits the parchment background — do not override with white or grey\nStudent-visible code uses base R only (no tidyverse prefixes)"
+  },
+  {
+    "objectID": "brand_guidelines.html#skripta-learning-materials-quarto-html-typst-pdf",
+    "href": "brand_guidelines.html#skripta-learning-materials-quarto-html-typst-pdf",
+    "title": "Visual Identity Guide — Biostatistika (MB120P163)",
+    "section": "15 Skripta (Learning Materials — Quarto HTML / Typst PDF)",
+    "text": "15 Skripta (Learning Materials — Quarto HTML / Typst PDF)\n\n15.1 HTML theme\n\nBase Quarto theme: flatly + custom skripta_theme.scss (generated from JSON)\nTOC: always shown (toc: true, toc-depth: 3), left sidebar in HTML\nSection numbering: always enabled (number-sections: true)\n\n\n\n15.2 Callout blocks\nUse Quarto callouts for exactly three purposes:\n\n\n\n\n\n\n\n\nCallout type\nPurpose\nAccent colour\n\n\n\n\nnote\nSupplementary explanation, extra detail\nindigo_velvet (SCSS customised)\n\n\nimportant\nKey concept or definition the student must retain\nindigo_velvet\n\n\nwarning\nCommon mistake or statistical misconception\norange\n\n\n\nAvoid tip and caution to limit visual variety. Do not invent new callout types.\n\n\n15.3 Colour in prose\n\nDo not colour prose text\nBold is the only allowed inline emphasis for key terms appearing for the first time\nItalic is reserved for species names and foreign-language terms — not for general emphasis\nCode inline spans are used for all R objects, function names, variable names, and file paths\n\n\n\n15.4 Figures in skripta\n\nSemantic colour mapping applies identically to skripta figures\nEvery figure requires a caption that interprets the figure — not just describes it\nDefault width: out.width = \"80%\" for HTML; out.width = \"100%\" for Typst/PDF\nAlways include fig-alt alt text for accessibility\n\n\n\n15.5 Code blocks\n\nStudent-visible chunks (echo: true): base R, no prefixes for preloaded packages\nHidden setup chunks (echo: false): tidyverse with full namespace (pkg::fn())\nCode folding is acceptable only for lengthy raw data preparation"
+  },
+  {
+    "objectID": "brand_guidelines.html#r-visualisations-extended-reference",
+    "href": "brand_guidelines.html#r-visualisations-extended-reference",
+    "title": "Visual Identity Guide — Biostatistika (MB120P163)",
+    "section": "16 R Visualisations — Extended Reference",
+    "text": "16 R Visualisations — Extended Reference\n\n16.1 Model uncertainty bands\nShow uncertainty via transparent fill using the model colour — do NOT introduce a new colour:\nggplot2::geom_ribbon(\n  ggplot2::aes(ymin = lower, ymax = upper),\n  fill  = clr_model,\n  alpha = 0.15\n)\n\n\n16.2 Two-model comparison\nUse a thinner, dashed line for the secondary model to reinforce the visual hierarchy:\n# Primary model\nggplot2::geom_smooth(colour = clr_model,  linewidth = 1.2, se = FALSE)\n# Secondary model\nggplot2::geom_smooth(colour = clr_model2, linewidth = 1.0, se = FALSE, linetype = \"dashed\")\n\n\n16.3 Boxplots and violin plots\nData points underneath a transparent model-coloured box:\nggplot2::geom_jitter(colour = clr_data,  alpha = 0.3,  width = 0.15, size = 1.5) +\nggplot2::geom_boxplot(colour = clr_model, fill = NA, linewidth = 0.8, outlier.shape = NA)\n\n\n16.4 Categorical group colour\nWhen colour must encode a grouping variable (e.g. species, treatment):\n\nUse a distinct palette that does NOT overlap with the semantic palette\nNever reuse clr_model or clr_highlight as a group colour\nDocument the override with a comment\nSuggested accessible palette for up to 4 groups:\n\nclr_skupiny &lt;- c(\n  \"skupina_A\" = \"#4E9A8A\",   # teal\n  \"skupina_B\" = \"#C2613A\",   # terracotta\n  \"skupina_C\" = \"#2E6CA4\",   # steel blue\n  \"skupina_D\" = \"#7D7D7D\"    # dark grey\n)\n\n\n16.5 Highlights and annotations\n# Highlighted individual point\nggplot2::geom_point(\n  data   = data_highlighted,\n  colour = clr_highlight,\n  size   = 4\n)\n\n# Annotation label\nggplot2::annotate(\n  geom     = \"text\",\n  x        = x_pos,\n  y        = y_pos,\n  label    = \"Klíčový výsledek\",\n  colour   = clr_highlight,\n  fontface = \"bold\",\n  size     = 4\n)\n\n\n16.6 Figure dimensions by output context\n\n\n\nContext\nfig.width\nfig.height\nout.width\n\n\n\n\nPresentation slide\n7\n5\n\"100%\"\n\n\nSkripta HTML\n7\n5\n\"80%\"\n\n\nSkripta PDF (Typst)\n6\n4\n\"100%\"\n\n\n\n\n\n16.7 Axis labels and Czech language\n\nAlways use Czech axis labels in student-visible plots; set with ggplot2::labs()\nNever leave default English column-name axis labels in student-facing output\nInclude units in parentheses where relevant: \"Délka křídla (mm)\"\nAnnotation text passed to ggplot2::annotate() must be Czech\nLegend labels and guide titles must be Czech\n\nSee §1.1 for the global Czech language requirement."
+  },
+  {
+    "objectID": "brand_guidelines.html#github-repository-identity",
+    "href": "brand_guidelines.html#github-repository-identity",
+    "title": "Visual Identity Guide — Biostatistika (MB120P163)",
+    "section": "17 GitHub / Repository Identity",
+    "text": "17 GitHub / Repository Identity\n\n17.1 README files\n\nLanguage: English (technical documentation is public-facing)\nContent: state what the repo contains, how to render locally, and who the audience is\nKeep concise; do not include personal context or course history\n\n\n\n17.2 Organisation profile (.github repo)\n\nThe README.md in the .github repo is the public face of the organisation\nColour references should use hex values where relevant\nTone: informative and neutral\n\n\n\n17.3 Release assets and file naming\n\nRendered outputs use predictable, fixed names: presentation.html, skripta.html, skripta_raw.pdf\nFile names must not contain spaces or special characters (including Czech diacritics)\nDo not change naming conventions without updating the corresponding GitHub Actions workflow"
+  }
+]
