@@ -27,6 +27,8 @@ generate_presentation_components <- function(
     "",
     "@import \"colors\";",
     "",
+    "/*-- scss:rules --*/",",
+    "",
     "// ---------------------------------------------------------------------------",
     "// Slide spacing — after h2 and between sibling elements",
     "// ---------------------------------------------------------------------------",
