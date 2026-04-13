@@ -81,6 +81,7 @@ purrr::walk(
     "generate_colors_scss.R",
     "generate_fonts_html.R",
     "generate_presentation_theme.R",
+    "generate_presentation_components.R",
     "generate_skripta_html_theme.R",
     "generate_skripta_typst_theme.R",
     "generate_r_theme.R"
@@ -174,6 +175,7 @@ c(
   "generate_colors_scss.R",
   "generate_fonts_html.R",
   "generate_presentation_theme.R",
+  "generate_presentation_components.R",
   "generate_skripta_html_theme.R",
   "generate_skripta_typst_theme.R",
   "generate_r_theme.R"
@@ -193,6 +195,7 @@ tryCatch(
     generate_colors_scss()
     generate_fonts_html()
     generate_presentation_theme()
+    generate_presentation_components()
     generate_skripta_html_theme()
     generate_skripta_typst_theme()
     generate_r_theme()
@@ -201,6 +204,7 @@ tryCatch(
     message("  theme/_colors.scss\n")
     message("  theme/fonts-include.html\n")
     message("  theme/presentation_theme.scss\n")
+    message("  theme/presentation_components.scss\n")
     message("  theme/skripta_theme.scss\n")
     message("  Learning_materials/skripta_theme.typ\n")
     message("  R/set_r_theme.R\n")
