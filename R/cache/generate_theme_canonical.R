@@ -44,26 +44,19 @@ purrr::walk(
       paste0(brand_base_url, "/", .x)
     path_dest <-
       here::here("theme", .x)
-    local_path <-
-      file.path(dirname(here::here()), "_brand", "quarto", .x)
-    if (file.exists(local_path)) {
-      file.copy(local_path, path_dest, overwrite = TRUE)
-      message("  Copied from local _brand: ", .x, "\n")
-    } else {
-      tryCatch(
-        expr = {
-          download.file(url_src, path_dest, quiet = TRUE, mode = "wb")
-          message("  Downloaded: ", .x, "\n")
-        },
-        error = function(e) {
-          message(
-            "  WARNING: Could not download ", .x,
-            " \u2014 using cached copy.\n",
-            "  (", e$message, ")\n"
-          )
-        }
-      )
-    }
+    tryCatch(
+      expr = {
+        download.file(url_src, path_dest, quiet = TRUE, mode = "wb")
+        message("  Downloaded: ", .x, "\n")
+      },
+      error = function(e) {
+        message(
+          "  WARNING: Could not download ", .x,
+          " \u2014 using cached copy.\n",
+          "  (", e$message, ")\n"
+        )
+      }
+    )
   }
 )
 
