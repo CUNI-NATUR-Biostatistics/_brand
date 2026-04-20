@@ -178,6 +178,7 @@ generate_presentation_theme <- function(
       paste0("  box-shadow: ", sh$componentShadow, ";"),
       "  display: block;",
       "  max-width: 100%;",
+      "  box-sizing: border-box;",
       "}",
       "",
       "// ---------------------------------------------------------------------------",
