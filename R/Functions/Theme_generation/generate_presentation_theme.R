@@ -155,6 +155,7 @@ generate_presentation_theme <- function(
       paste0("  box-shadow: ", sh$componentShadow, ";"),
       paste0("  border: ", cd$codeBorder, ";"),
       paste0("  border-radius: ", cd$codeBorderRadius, ";"),
+      "  box-sizing: border-box;",
       "}",
       "",
       ".reveal pre code {",
