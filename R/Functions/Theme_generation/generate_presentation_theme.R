@@ -175,8 +175,6 @@ generate_presentation_theme <- function(
       "// ---------------------------------------------------------------------------",
       ".reveal .cell-output-display img {",
       paste0("  border-radius: ", cd$codeBorderRadius, ";"),
-      paste0("  border: ", cd$codeBorder, ";"),
-      paste0("  box-shadow: ", sh$componentShadow, ";"),
       "  display: block;",
       "  max-width: 100%;",
       "  box-sizing: border-box;",
