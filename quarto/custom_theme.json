@@ -17,7 +17,8 @@
   "code": {
     "codeBorderRadius": "6px",
     "codeLineHeight": "1.4",
-    "inlineCodePadding": "0.1rem 0.3rem"
+    "inlineCodePadding": "0.1rem 0.3rem",
+    "codeBorder": "1.5px solid rgba(0, 0, 0, 0.09)"
   },
   "blockquote": {
     "blockquotePadding": "12px 20px",
@@ -30,6 +31,7 @@
     "tableBorderOpacity": "0.25"
   },
   "shadows": {
-    "blockquoteShadow": "0 2px 8px rgba(0, 0, 0, 0.08)"
+    "blockquoteShadow": "0 2px 8px rgba(0, 0, 0, 0.08)",
+    "componentShadow": "0 8px 20px rgba(0, 0, 0, 0.07)"
   }
 }
