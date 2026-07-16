@@ -4,6 +4,10 @@ This repository is the **single source of truth** for the visual identity of the
 [Biostatistika (MB120P163)](https://github.com/CUNI-NATUR-Biostatistics) course
 at the Faculty of Science, Charles University.
 
+## Recommended workspace
+
+This repository is designed to be maintained in the `CUNI-NATUR-Biostatistics` multi-root workspace. Shared course context and canonical AI-agent guidance live in the private `_internal` repository; the recommended setup is documented in `_internal/workspace-setup.md`. An AI assistant working from this repository alone may not have the complete course context.
+
 ## Contents
 
 - [`quarto/`](quarto/) — canonical JSON configuration files for all Quarto and R themes
