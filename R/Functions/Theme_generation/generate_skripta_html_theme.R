@@ -133,7 +133,7 @@ generate_skripta_html_theme <- function(
       "// Quarto callout colour overrides (set before Quarto processes its defaults)",
       "// ---------------------------------------------------------------------------",
       "$callout-color-note:      $indigo_velvet;",
-      "$callout-color-tip:       $amethyst;",
+      "$callout-color-tip:       $grey_olive;",
       "$callout-color-warning:   $orange;",
       "$callout-color-important: $indigo_velvet;",
       "$callout-color-caution:   $orange;",

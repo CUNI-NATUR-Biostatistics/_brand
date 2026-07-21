@@ -48,7 +48,7 @@ generate_skripta_typst_theme <- function(
   heading_color_hex <- resolve_hex("headingColor")
   link_color_hex <- resolve_hex("linkColor")
   code_bg_hex <- resolve_hex("codeBackgroundColor")
-  accent_color_hex <- resolve_hex("accentColor")
+  grey_olive_hex <- colors_data$primary[["grey_olive"]]
   orange_hex <- colors_data$primary[["orange"]]
 
   sz <- fonts$typstSizes
@@ -168,9 +168,11 @@ generate_skripta_typst_theme <- function(
         "\n  body_background_color: white",
         "\n) = {",
         "\n  let accent = if background_color == rgb(\"#ccf1e3\") {",
-        "\n    rgb(\"", accent_color_hex, "\")  // tip \u2192 amethyst",
-        "\n  } else if (background_color == rgb(\"#fcefdc\") or background_color == rgb(\"#ffe5d0\") or background_color == rgb(\"#f7dddc\")) {",
-        "\n    rgb(\"", orange_hex, "\")  // warning / caution / important \u2192 orange",
+        "\n    rgb(\"", grey_olive_hex, "\")  // tip \u2192 grey_olive",
+        "\n  } else if (background_color == rgb(\"#fcefdc\") or background_color == rgb(\"#ffe5d0\")) {",
+        "\n    rgb(\"", orange_hex, "\")  // warning / caution \u2192 orange",
+        "\n  } else if background_color == rgb(\"#f7dddc\") {",
+        "\n    rgb(\"", heading_color_hex, "\")  // important \u2192 indigo_velvet",
         "\n  } else {",
         "\n    rgb(\"", heading_color_hex, "\")  // note + fallback \u2192 indigo_velvet",
         "\n  }",
