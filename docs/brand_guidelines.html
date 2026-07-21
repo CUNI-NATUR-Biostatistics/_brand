@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,6 +11,9 @@
 
 <title>Visual Identity Guide — Biostatistika (MB120P163) – Biostatistika — Brand Guidelines</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -69,15 +72,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-f938f6e5ca7bfbd6305a7d1113a49c1d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-1eb2a280a64a1f5f4b84ce19fa1dd180.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-84fa721f727adb22b45a30e8eb990c00.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-07af4eb71becae4e73f55ebd8362161a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -118,6 +120,112 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&amp;display=swap" rel="stylesheet">
 
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet">
+
+
+
+<!-- Slide background fix: propagate .bg-XXX classes to RevealJS background layer. -->
+
+<!-- RevealJS renders full-viewport backgrounds in a separate .backgrounds container,  -->
+
+<!-- so background-color on <section> only tints the content box. This script reads   -->
+
+<!-- the .bg-XXX class and sets the matching data-background-color attribute so that  -->
+
+<!-- Reveal picks it up for the full-bleed background layer.                          -->
+
+<script>
+
+  (function () {
+
+    var BG_COLORS = {
+
+      'bg-indigo':    '#5D2890',
+
+      'bg-amethyst':  '#86579E',
+
+      'bg-olive':     '#8A8A8A',
+
+      'bg-red':       '#C94C4C',
+
+      'bg-graphite':  '#2E2E2E',
+
+      'bg-orange':    '#F3A712',
+
+      'bg-white':     '#FFFFFF',
+
+      'bg-parchment': '#F4F1EC'
+
+    };
+
+
+
+    function applyBgColors() {
+
+      var backgrounds = document.querySelector('.reveal > .backgrounds');
+
+      if (!backgrounds) return;
+
+      var sections = document.querySelectorAll('.reveal .slides section');
+
+      sections.forEach(function (section, idx) {
+
+        var bgClass = Object.keys(BG_COLORS).find(function (cls) {
+
+          return section.classList.contains(cls);
+
+        });
+
+        if (!bgClass) return;
+
+        var color = BG_COLORS[bgClass];
+
+        // Set data-background-color so Reveal uses it for the background layer.
+
+        section.setAttribute('data-background-color', color);
+
+        // Also directly paint the background element that is already in the DOM.
+
+        var bgEls = backgrounds.querySelectorAll('.slide-background');
+
+        if (bgEls[idx]) {
+
+          bgEls[idx].style.backgroundColor = color;
+
+          var contentEl = bgEls[idx].querySelector('.slide-background-content');
+
+          if (contentEl) contentEl.style.backgroundColor = color;
+
+        }
+
+      });
+
+    }
+
+
+
+    // Run once Reveal is ready; also re-run on slide change in case of lazy init.
+
+    if (typeof Reveal !== 'undefined' && Reveal.isReady && Reveal.isReady()) {
+
+      applyBgColors();
+
+    } else {
+
+      document.addEventListener('DOMContentLoaded', function () {
+
+        if (typeof Reveal !== 'undefined') {
+
+          Reveal.on('ready', applyBgColors);
+
+        }
+
+      });
+
+    }
+
+  })();
+
+</script>
 
 
 
@@ -210,7 +318,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">March 26, 2026</p>
+      <p class="date-modified">July 21, 2026</p>
     </div>
   </div>
     
@@ -730,7 +838,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="callout-blocks" class="level3" data-number="15.2">
 <h3 data-number="15.2" class="anchored" data-anchor-id="callout-blocks"><span class="header-section-number">15.2</span> Callout blocks</h3>
-<p>Use Quarto callouts for exactly three purposes:</p>
+<p>Use Quarto callouts for exactly four purposes:</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 37%">
@@ -751,18 +859,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>indigo_velvet (SCSS customised)</td>
 </tr>
 <tr class="even">
+<td><code>tip</code></td>
+<td>Optional technical context that is not needed for the main argument</td>
+<td>grey_olive</td>
+</tr>
+<tr class="odd">
 <td><code>important</code></td>
 <td>Key concept or definition the student must retain</td>
 <td>indigo_velvet</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>warning</code></td>
 <td>Common mistake or statistical misconception</td>
 <td>orange</td>
 </tr>
 </tbody>
 </table>
-<p>Avoid <code>tip</code> and <code>caution</code> to limit visual variety. Do not invent new callout types.</p>
+<p>Use <code>tip</code> only with the Czech heading <strong>Doplňující</strong> (optionally followed by a short descriptor). For a long optional code example, place a brief <code>tip</code> callout before the code and fold the code in HTML; the code remains in the normal page flow in PDF. A short self-contained technical example may instead be placed directly in a collapsible <code>tip</code> callout, which remains expanded in PDF. Avoid <code>caution</code> and do not invent further callout types.</p>
 </section>
 <section id="colour-in-prose" class="level3" data-number="15.3">
 <h3 data-number="15.3" class="anchored" data-anchor-id="colour-in-prose"><span class="header-section-number">15.3</span> Colour in prose</h3>

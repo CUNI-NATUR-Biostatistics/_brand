@@ -522,15 +522,16 @@ Avoid expanding the palette unless strictly necessary.
 
 ### Callout blocks
 
-Use Quarto callouts for exactly three purposes:
+Use Quarto callouts for exactly four purposes:
 
 | Callout type | Purpose | Accent colour |
 | ------------ | ------- | ------------- |
 | `note` | Supplementary explanation, extra detail | indigo_velvet (SCSS customised) |
+| `tip` | Optional technical context that is not needed for the main argument | grey_olive |
 | `important` | Key concept or definition the student must retain | indigo_velvet |
 | `warning` | Common mistake or statistical misconception | orange |
 
-Avoid `tip` and `caution` to limit visual variety. Do not invent new callout types.
+Use `tip` only with the Czech heading **Doplňující** (optionally followed by a short descriptor). For a long optional code example, place a brief `tip` callout before the code and fold the code in HTML; the code remains in the normal page flow in PDF. A short self-contained technical example may instead be placed directly in a collapsible `tip` callout, which remains expanded in PDF. Avoid `caution` and do not invent further callout types.
 
 ### Colour in prose
 
