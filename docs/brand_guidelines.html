@@ -79,7 +79,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-1eb2a280a64a1f5f4b84ce19fa1dd180.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-07af4eb71becae4e73f55ebd8362161a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-25ee3319555bb1d7a3f081fd3f4f269c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -318,7 +318,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">July 21, 2026</p>
+      <p class="date-modified">July 25, 2026</p>
     </div>
   </div>
     
@@ -800,24 +800,321 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Never place more than two distinct figures on a single slide</li>
 </ul>
 </section>
-<section id="progressive-disclosure" class="level3" data-number="14.5">
-<h3 data-number="14.5" class="anchored" data-anchor-id="progressive-disclosure"><span class="header-section-number">14.5</span> Progressive disclosure</h3>
+<section id="presentation-crafting-contract" class="level3" data-number="14.5">
+<h3 data-number="14.5" class="anchored" data-anchor-id="presentation-crafting-contract"><span class="header-section-number">14.5</span> Presentation crafting contract</h3>
+<p>The template presentation contains a working gallery of the available RevealJS components. The rules below are the canonical decision guide for using that gallery in a real lesson.</p>
+<ul>
+<li>Build each concept as <strong>data moment → observation or prediction → concept name → formalisation</strong>. A statistical term should not open its own concept block.</li>
+<li>Give each slide one dominant message or teaching move.</li>
+<li>Alternate structured components with plain figures, code/output layouts, short questions, and minimal transitions.</li>
+<li>In any run of five consecutive slides, no more than three should use a named card, panel, box, blockquote, or strip as the primary visual element.</li>
+<li>Colour has semantic meaning: graphite or grey for observed data, indigo_velvet for models and estimates, and orange for interpretation, uncertainty, or warnings.</li>
+<li>Match highlighted words to the corresponding marks, lines, intervals, and component accents on the slide.</li>
+</ul>
+<p>Learning outcomes are a stable exception to the general preference for more visual slide structures. They should remain a concise, incremental <strong>bullet list</strong>, not a grid of panels or cards. Use inline highlights inside the bullets to make the statistical contrasts easy to scan:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Výsledky učení</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>Po dnešní přednášce budete schopni:</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>::: {.incremental}</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>rozlišit <span class="co">[</span><span class="ot">odhad efektu</span><span class="co">]</span>{.text-hgl-indigo_velvet}</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  od jeho <span class="co">[</span><span class="ot">nejistoty</span><span class="co">]</span>{.text-hgl-orange}</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>interpretovat <span class="co">[</span><span class="ot">95% interval spolehlivosti</span><span class="co">]</span>{.text-hgl-orange}</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>zapsat výsledek s <span class="co">[</span><span class="ot">odhadem</span><span class="co">]</span>{.text-hgl-indigo_velvet},</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">[</span><span class="ot">intervalem a jednotkami</span><span class="co">]</span>{.text-hgl-orange}</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="five-slide-families" class="level3" data-number="14.6">
+<h3 data-number="14.6" class="anchored" data-anchor-id="five-slide-families"><span class="header-section-number">14.6</span> Five slide families</h3>
+<p>A coherent lecture cycles through five functional slide families. Students should be able to recognise what a slide is asking them to do before reading every word.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Family</th>
+<th>Purpose</th>
+<th>Typical treatment</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Interaction</td>
+<td>prediction, MCQ, think-pair-share, silent write</td>
+<td>plain bold question or <code>.panel-question</code></td>
+</tr>
+<tr class="even">
+<td>Data reveal</td>
+<td>new graph, table, code output, or visual layer</td>
+<td>full-width visual or code/output layout</td>
+</tr>
+<tr class="odd">
+<td>Interpretation</td>
+<td>read the evidence and state what it supports</td>
+<td>graph plus <code>.panel-result</code>, <code>.strip-*</code>, or <code>.takeaway-strip</code></td>
+</tr>
+<tr class="even">
+<td>Rule or warning</td>
+<td>heuristic, misconception, limitation</td>
+<td><code>.card-rule</code>, <code>.card-warning</code>, or light warning panel</td>
+</tr>
+<tr class="odd">
+<td>Transition or summary</td>
+<td>reset attention, connect blocks, close the lesson</td>
+<td>minimal prompt, short bullet summary, or compact blockquote</td>
+</tr>
+</tbody>
+</table>
+<p>No block of five or more slides should consist of only one family. Repetition is justified when the same-data-one-new-layer sequence is itself the teaching move, but the sequence should then end with a visibly different interpretation or checkpoint slide.</p>
+</section>
+<section id="component-hierarchy" class="level3" data-number="14.7">
+<h3 data-number="14.7" class="anchored" data-anchor-id="component-hierarchy"><span class="header-section-number">14.7</span> Component hierarchy</h3>
+<p>Choose the lightest component that communicates the intended structure.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Family</th>
+<th>Visual weight</th>
+<th>Use for</th>
+<th>Do not use for</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Plain slide</td>
+<td>none</td>
+<td>full-width graph, short prompt, transition, learning outcomes</td>
+<td>ordinary long explanation</td>
+</tr>
+<tr class="even">
+<td><code>.panel-*</code></td>
+<td>light</td>
+<td>question, result, data context, short comparison</td>
+<td>turning every bullet into a separate tile</td>
+</tr>
+<tr class="odd">
+<td><code>.card-*</code></td>
+<td>heavy</td>
+<td>rule, misconception, warning, major decision</td>
+<td>routine conclusions or repeated prompts</td>
+</tr>
+<tr class="even">
+<td><code>.strip-*</code></td>
+<td>light and horizontal</td>
+<td>one closing statement, workflow step, semantic takeaway</td>
+<td>multi-paragraph explanation or a second slide heading</td>
+</tr>
+<tr class="odd">
+<td><code>.takeaway-strip</code></td>
+<td>light and prominent</td>
+<td>the main conclusion that closes a slide or short sequence</td>
+<td>every interaction instruction</td>
+</tr>
+<tr class="even">
+<td><code>.blockquote</code></td>
+<td>medium</td>
+<td>short definition, biological frame, quoted principle</td>
+<td>generic body prose</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>.box-*</code> names are semantic aliases. Their visual weight is not uniform:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Alias</th>
+<th>Maps to</th>
+<th>Weight</th>
+<th>Primary use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>.box-question</code></td>
+<td><code>.panel-question</code></td>
+<td>light</td>
+<td>MCQ or reflection question</td>
+</tr>
+<tr class="even">
+<td><code>.box-result</code></td>
+<td><code>.panel-result</code></td>
+<td>light</td>
+<td>main analytical result</td>
+</tr>
+<tr class="odd">
+<td><code>.box-data</code></td>
+<td><code>.panel-data</code></td>
+<td>light</td>
+<td>dataset or measurement context</td>
+</tr>
+<tr class="even">
+<td><code>.box-rule</code></td>
+<td><code>.card-rule</code></td>
+<td>heavy</td>
+<td>rule or first-choice heuristic</td>
+</tr>
+<tr class="odd">
+<td><code>.box-warning</code></td>
+<td><code>.card-warning</code></td>
+<td>heavy</td>
+<td>methodological warning</td>
+</tr>
+</tbody>
+</table>
+<p>Panels use <code>[text]{.panel-title}</code> or <code>[text]{.panel-lead}</code> for their internal heading. Cards use <code>[text]{.card-title}</code> as the first element so the coloured top band is generated correctly.</p>
+</section>
+<section id="panels-and-cards" class="level3" data-number="14.8">
+<h3 data-number="14.8" class="anchored" data-anchor-id="panels-and-cards"><span class="header-section-number">14.8</span> Panels and cards</h3>
+<p>Use panels when the information benefits from a visible category but should remain part of the normal slide flow:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>::: {.panel-result}</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Co už víme</span><span class="co">]</span>{.panel-title}</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>Směr vztahu je kladný a odhad sklonu je 4,05 g/mm.</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Use cards only when the content must carry more visual weight:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>::: {.card-warning}</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Pozor na interpretaci</span><span class="co">]</span>{.card-title}</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>Viditelná asociace sama o sobě neprokazuje kauzalitu.</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Contrasting panels are appropriate when the contrast itself is the concept, for example “co už víme” versus “co ještě nevíme”. Do not use a two-by-two panel grid merely to make an ordinary list look more designed.</p>
+</section>
+<section id="strips-and-takeaway-strips" class="level3" data-number="14.9">
+<h3 data-number="14.9" class="anchored" data-anchor-id="strips-and-takeaway-strips"><span class="header-section-number">14.9</span> Strips and takeaway strips</h3>
+<p>Strips are the lowest-weight named component. They keep a short conclusion attached to the evidence above it without turning the entire slide into a panel. Use no more than one dominant strip on a slide.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>::: {.strip-indigo}</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>Sklon říká, jak rychle se mění průměrná odezva s prediktorem.</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>::: {.strip-orange}</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>Šířka intervalu vyjadřuje nejistotu odhadu.</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>::: {.takeaway-strip}</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>**Hlavní závěr.** Uvádíme velikost efektu i její nejistotu.</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Semantic strip variants:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Class</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>.strip-indigo</code></td>
+<td>model, estimate, or statistical result</td>
+</tr>
+<tr class="even">
+<td><code>.strip-orange</code></td>
+<td>interpretation, uncertainty, or point requiring attention</td>
+</tr>
+<tr class="odd">
+<td><code>.strip-amethyst</code></td>
+<td>reasoning step, method, or rule</td>
+</tr>
+<tr class="even">
+<td><code>.strip-olive</code></td>
+<td>data context or descriptive observation</td>
+</tr>
+<tr class="odd">
+<td><code>.strip-red</code></td>
+<td>error, invalid inference, or serious warning</td>
+</tr>
+<tr class="even">
+<td><code>.takeaway-strip</code></td>
+<td>cross-layer conclusion using the brand gradient</td>
+</tr>
+</tbody>
+</table>
+<p>Add <code>.strip-compact</code> only when two closely related conclusions genuinely need reduced vertical spacing. A strip should contain one sentence or one compact list, not a paragraph of lecture notes.</p>
+</section>
+<section id="inline-highlights" class="level3" data-number="14.10">
+<h3 data-number="14.10" class="anchored" data-anchor-id="inline-highlights"><span class="header-section-number">14.10</span> Inline highlights</h3>
+<p>Use <code>.text-hgl-*</code> primarily inside body text, bullets, questions, and takeaway sentences. Highlighting only slide headings does not help students scan a verbose slide.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Naměřený bod je <span class="co">[</span><span class="ot">pozorování</span><span class="co">]</span>{.text-hgl-graphite}, fialový bod je</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">odhad modelu</span><span class="co">]</span>{.text-hgl-indigo_velvet} a vzdálenost mezi nimi je</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">residuum</span><span class="co">]</span>{.text-hgl-orange}.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Available highlight colours are <code>indigo_velvet</code>, <code>orange</code>, <code>amethyst</code>, <code>grey_olive</code>, <code>graphite</code>, <code>white</code>, <code>light_gray</code>, and <code>parchment</code>. Prefer the three semantic colours. Never assign a highlighted word a colour that contradicts the figure or legend representing the same concept.</p>
+</section>
+<section id="blockquotes-backgrounds-and-layout-utilities" class="level3" data-number="14.11">
+<h3 data-number="14.11" class="anchored" data-anchor-id="blockquotes-backgrounds-and-layout-utilities"><span class="header-section-number">14.11</span> Blockquotes, backgrounds, and layout utilities</h3>
+<p>Use <code>::: {.blockquote}</code> for one short definition, biological framing statement, or quoted principle. Use the styled div rather than Markdown <code>&gt;</code> syntax. A blockquote is not a general-purpose text box.</p>
+<p>Background classes are appropriate for true divider or reset slides:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Background</th>
+<th>Text treatment</th>
+<th>Recommended use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>.bg-indigo</code>, <code>.bg-amethyst</code>, <code>.bg-olive</code>, <code>.bg-red</code>, <code>.bg-graphite</code></td>
+<td>white text</td>
+<td>rare section divider or major reset</td>
+</tr>
+<tr class="even">
+<td><code>.bg-orange</code>, <code>.bg-white</code>, <code>.bg-parchment</code></td>
+<td>graphite text</td>
+<td>light divider, contrast slide, or example comparison</td>
+</tr>
+</tbody>
+</table>
+<p>Do not use background changes merely to make a routine content slide look different. The colour must reinforce the function of the slide.</p>
+<p>Use <code>::: {.columns .align-top}</code> when unequal columns should begin at the same vertical position. Plain <code>.columns</code> may remain vertically centred when that balance is intentional. The utility classes <code>.slide-margin-top-15</code>, <code>.slide-margin-top-25</code>, and <code>.center-vertical</code> are available for isolated elements, but normal document flow is preferred whenever possible.</p>
+</section>
+<section id="roughnotation" class="level3" data-number="14.12">
+<h3 data-number="14.12" class="anchored" data-anchor-id="roughnotation"><span class="header-section-number">14.12</span> Roughnotation</h3>
+<p>The <code>quarto-roughnotation</code> shorthand is a live-teaching accent, not a second component system:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">klíčová fráze</span><span class="co">]</span>{.rn-underline-indigo}</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">0,76</span><span class="co">]</span>{.rn-circle-orange}</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">část vzorce</span><span class="co">]</span>{.rn-bracket-indigo}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Use at most one roughnotation mark on a typical slide and only a few across a lecture. It may underline one phrase, circle one result, or bracket one part of an equation after students have had time to look. Do not annotate paragraphs, decorate all answer choices, or combine several roughnotation colours on one slide. A semantic text highlight or direct plot annotation is the default; roughnotation is reserved for a deliberate live gesture.</p>
+</section>
+<section id="progressive-disclosure" class="level3" data-number="14.13">
+<h3 data-number="14.13" class="anchored" data-anchor-id="progressive-disclosure"><span class="header-section-number">14.13</span> Progressive disclosure</h3>
 <ul>
 <li>Reveal layers in this order: data (grey) → model (purple) → interpretation (orange callout)</li>
 <li>Use RevealJS fragments or incremental list options</li>
 <li>Never show a model result before posing a prediction question to the audience</li>
+<li>Use <code>.incremental</code> for learning outcomes and lists in which each item is a new idea.</li>
+<li>Wrap a complete panel, card, or strip in <code>.fragment</code> when the whole component should appear after discussion.</li>
+<li>Progressive disclosure should reveal reasoning, not merely slow down a list that students could read more clearly at once.</li>
 </ul>
 </section>
-<section id="interaction-slides" class="level3" data-number="14.6">
-<h3 data-number="14.6" class="anchored" data-anchor-id="interaction-slides"><span class="header-section-number">14.6</span> Interaction slides</h3>
+<section id="interaction-slides" class="level3" data-number="14.14">
+<h3 data-number="14.14" class="anchored" data-anchor-id="interaction-slides"><span class="header-section-number">14.14</span> Interaction slides</h3>
 <ul>
-<li>Mark interaction slides with a thick <code>indigo_velvet</code> left border or a distinct callout block</li>
-<li>The word “Otázka” or “Diskuze” can be accented in <code>orange</code></li>
-<li>Keep ALL interaction slides visually consistent within a single lecture</li>
+<li>Make interaction slides recognisable, but vary their furniture across the lecture: voting cards, a light question panel, a silent-write prompt, or an unframed centred question can all be appropriate.</li>
+<li>Use the same visual treatment for all answer options within one question.</li>
+<li>Reveal the correct answer only after students commit; add one brand-consistent cue rather than restyling the whole option.</li>
+<li>The word “Otázka” or “Diskuze” may be accented in orange, but the task itself must remain the dominant element.</li>
+<li>Follow a prediction with a result and a visible interpretation or checkpoint.</li>
 </ul>
 </section>
-<section id="code-display-on-slides" class="level3" data-number="14.7">
-<h3 data-number="14.7" class="anchored" data-anchor-id="code-display-on-slides"><span class="header-section-number">14.7</span> Code display on slides</h3>
+<section id="code-display-on-slides" class="level3" data-number="14.15">
+<h3 data-number="14.15" class="anchored" data-anchor-id="code-display-on-slides"><span class="header-section-number">14.15</span> Code display on slides</h3>
 <ul>
 <li>Keep visible code chunks to ≤ 8 lines; scrolling is acceptable for demos</li>
 <li>Code output inherits the parchment background — do not override with white or grey</li>
@@ -895,10 +1192,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Always include <code>fig-alt</code> alt text for accessibility</li>
 </ul>
 </section>
-<section id="interactive-html-components" class="level3" data-number="15.5">
-<h3 data-number="15.5" class="anchored" data-anchor-id="interactive-html-components"><span class="header-section-number">15.5</span> Interactive HTML components</h3>
-<section id="glossary-tooltips" class="level4" data-number="15.5.1">
-<h4 data-number="15.5.1" class="anchored" data-anchor-id="glossary-tooltips"><span class="header-section-number">15.5.1</span> Glossary tooltips</h4>
+<section id="markdown-tables" class="level3" data-number="15.5">
+<h3 data-number="15.5" class="anchored" data-anchor-id="markdown-tables"><span class="header-section-number">15.5</span> Markdown tables</h3>
+<p>Markdown tables use one shared treatment across skripta HTML, Typst/PDF, and RevealJS:</p>
+<ul>
+<li>full available width, with wrapping inside cells;</li>
+<li>indigo_velvet header with white bold text;</li>
+<li>visible but quiet borders between cells;</li>
+<li>sufficient cell padding for scanning;</li>
+<li>alternating white and parchment/light-gray body rows.</li>
+</ul>
+<p>These rules are generated from <code>quarto/custom_theme.json</code>. Do not restyle an individual lesson table to compensate for unformatted PDF defaults; correct the shared generator and visually verify representative HTML and Typst/PDF tables.</p>
+</section>
+<section id="interactive-html-components" class="level3" data-number="15.6">
+<h3 data-number="15.6" class="anchored" data-anchor-id="interactive-html-components"><span class="header-section-number">15.6</span> Interactive HTML components</h3>
+<section id="glossary-tooltips" class="level4" data-number="15.6.1">
+<h4 data-number="15.6.1" class="anchored" data-anchor-id="glossary-tooltips"><span class="header-section-number">15.6.1</span> Glossary tooltips</h4>
 <ul>
 <li>Tooltip background: <code>#FFFFFF</code> (white) — must contrast against the parchment (<code>#F4F1EC</code>) page background</li>
 <li>Border: <code>1px solid rgba(93, 40, 144, 0.25)</code> — subtle indigo_velvet tint</li>
@@ -906,8 +1215,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>The CSS is emitted by <code>nastaveni-slovnik</code> chunk; the <code>glossary_style()</code> call must use <code>def_bg = "#FFFFFF"</code></li>
 </ul>
 </section>
-<section id="tabsets-.panel-tabset" class="level4" data-number="15.5.2">
-<h4 data-number="15.5.2" class="anchored" data-anchor-id="tabsets-.panel-tabset"><span class="header-section-number">15.5.2</span> Tabsets (<code>.panel-tabset</code>)</h4>
+<section id="tabsets-.panel-tabset" class="level4" data-number="15.6.2">
+<h4 data-number="15.6.2" class="anchored" data-anchor-id="tabsets-.panel-tabset"><span class="header-section-number">15.6.2</span> Tabsets (<code>.panel-tabset</code>)</h4>
 <p>Tab button states use existing colour tokens to give clear click affordance against the parchment background:</p>
 <table class="caption-top table">
 <colgroup>
@@ -948,8 +1257,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This styling is generated automatically by <code>generate_skripta_html_theme.R</code> and must not be overridden manually.</p>
 </section>
 </section>
-<section id="code-blocks" class="level3" data-number="15.6">
-<h3 data-number="15.6" class="anchored" data-anchor-id="code-blocks"><span class="header-section-number">15.6</span> Code blocks</h3>
+<section id="code-blocks" class="level3" data-number="15.7">
+<h3 data-number="15.7" class="anchored" data-anchor-id="code-blocks"><span class="header-section-number">15.7</span> Code blocks</h3>
 <ul>
 <li>Student-visible chunks (<code>echo: true</code>): base R, no prefixes for preloaded packages</li>
 <li>Hidden setup chunks (<code>echo: false</code>): tidyverse with full namespace (<code>pkg::fn()</code>)</li>
@@ -963,25 +1272,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="model-uncertainty-bands" class="level3" data-number="16.1">
 <h3 data-number="16.1" class="anchored" data-anchor-id="model-uncertainty-bands"><span class="header-section-number">16.1</span> Model uncertainty bands</h3>
 <p>Show uncertainty via transparent fill using the model colour — do NOT introduce a new colour:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">geom_ribbon</span>(</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">ymin =</span> lower, <span class="at">ymax =</span> upper),</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">fill  =</span> clr_model,</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.15</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">geom_ribbon</span>(</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">ymin =</span> lower, <span class="at">ymax =</span> upper),</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">fill  =</span> clr_model,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.15</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="two-model-comparison" class="level3" data-number="16.2">
 <h3 data-number="16.2" class="anchored" data-anchor-id="two-model-comparison"><span class="header-section-number">16.2</span> Two-model comparison</h3>
 <p>Use a thinner, dashed line for the secondary model to reinforce the visual hierarchy:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Primary model</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">geom_smooth</span>(<span class="at">colour =</span> clr_model,  <span class="at">linewidth =</span> <span class="fl">1.2</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Secondary model</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">geom_smooth</span>(<span class="at">colour =</span> clr_model2, <span class="at">linewidth =</span> <span class="fl">1.0</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Primary model</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">geom_smooth</span>(<span class="at">colour =</span> clr_model,  <span class="at">linewidth =</span> <span class="fl">1.2</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Secondary model</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">geom_smooth</span>(<span class="at">colour =</span> clr_model2, <span class="at">linewidth =</span> <span class="fl">1.0</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="boxplots-and-violin-plots" class="level3" data-number="16.3">
 <h3 data-number="16.3" class="anchored" data-anchor-id="boxplots-and-violin-plots"><span class="header-section-number">16.3</span> Boxplots and violin plots</h3>
 <p>Data points underneath a transparent model-coloured box:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">geom_jitter</span>(<span class="at">colour =</span> clr_data,  <span class="at">alpha =</span> <span class="fl">0.3</span>,  <span class="at">width =</span> <span class="fl">0.15</span>, <span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">geom_boxplot</span>(<span class="at">colour =</span> clr_model, <span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">linewidth =</span> <span class="fl">0.8</span>, <span class="at">outlier.shape =</span> <span class="cn">NA</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">geom_jitter</span>(<span class="at">colour =</span> clr_data,  <span class="at">alpha =</span> <span class="fl">0.3</span>,  <span class="at">width =</span> <span class="fl">0.15</span>, <span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">geom_boxplot</span>(<span class="at">colour =</span> clr_model, <span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">linewidth =</span> <span class="fl">0.8</span>, <span class="at">outlier.shape =</span> <span class="cn">NA</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="categorical-group-colour" class="level3" data-number="16.4">
 <h3 data-number="16.4" class="anchored" data-anchor-id="categorical-group-colour"><span class="header-section-number">16.4</span> Categorical group colour</h3>
@@ -992,32 +1301,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Document the override with a comment</li>
 <li>Suggested accessible palette for up to 4 groups:</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>clr_skupiny <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"skupina_A"</span> <span class="ot">=</span> <span class="st">"#4E9A8A"</span>,   <span class="co"># teal</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"skupina_B"</span> <span class="ot">=</span> <span class="st">"#C2613A"</span>,   <span class="co"># terracotta</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"skupina_C"</span> <span class="ot">=</span> <span class="st">"#2E6CA4"</span>,   <span class="co"># steel blue</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"skupina_D"</span> <span class="ot">=</span> <span class="st">"#7D7D7D"</span>    <span class="co"># dark grey</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>clr_skupiny <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"skupina_A"</span> <span class="ot">=</span> <span class="st">"#4E9A8A"</span>,   <span class="co"># teal</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"skupina_B"</span> <span class="ot">=</span> <span class="st">"#C2613A"</span>,   <span class="co"># terracotta</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"skupina_C"</span> <span class="ot">=</span> <span class="st">"#2E6CA4"</span>,   <span class="co"># steel blue</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"skupina_D"</span> <span class="ot">=</span> <span class="st">"#7D7D7D"</span>    <span class="co"># dark grey</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="highlights-and-annotations" class="level3" data-number="16.5">
 <h3 data-number="16.5" class="anchored" data-anchor-id="highlights-and-annotations"><span class="header-section-number">16.5</span> Highlights and annotations</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Highlighted individual point</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">geom_point</span>(</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data   =</span> data_highlighted,</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">colour =</span> clr_highlight,</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">size   =</span> <span class="dv">4</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Annotation label</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">annotate</span>(</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">geom     =</span> <span class="st">"text"</span>,</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">x        =</span> x_pos,</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">y        =</span> y_pos,</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">label    =</span> <span class="st">"Klíčový výsledek"</span>,</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">colour   =</span> clr_highlight,</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">fontface =</span> <span class="st">"bold"</span>,</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">size     =</span> <span class="dv">4</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Highlighted individual point</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">geom_point</span>(</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data   =</span> data_highlighted,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">colour =</span> clr_highlight,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">size   =</span> <span class="dv">4</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Annotation label</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">annotate</span>(</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">geom     =</span> <span class="st">"text"</span>,</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">x        =</span> x_pos,</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">y        =</span> y_pos,</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">label    =</span> <span class="st">"Klíčový výsledek"</span>,</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">colour   =</span> clr_highlight,</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">fontface =</span> <span class="st">"bold"</span>,</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">size     =</span> <span class="dv">4</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="figure-dimensions-by-output-context" class="level3" data-number="16.6">
 <h3 data-number="16.6" class="anchored" data-anchor-id="figure-dimensions-by-output-context"><span class="header-section-number">16.6</span> Figure dimensions by output context</h3>
