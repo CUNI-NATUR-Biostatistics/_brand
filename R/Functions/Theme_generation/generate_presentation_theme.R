@@ -41,6 +41,7 @@ generate_presentation_theme <- function(
   pr <- ct$presentation
   cd <- ct$code
   bq <- ct$blockquote
+  tb <- ct$table
   sh <- ct$shadows
 
   body_font_stack <-
@@ -186,6 +187,17 @@ generate_presentation_theme <- function(
       ".reveal table th {",
       "  background-color: $tableHeaderBackground !important;",
       "  color: $tableHeaderColor !important;",
+      paste0("  padding: ", tb$tableCellPadding, ";"),
+      "  border-bottom: 2px solid $tableBorderColor;",
+      "}",
+      "",
+      ".reveal table td {",
+      paste0("  padding: ", tb$tableCellPadding, ";"),
+      paste0(
+        "  border-bottom: 1px solid rgba($tableBorderColor, ",
+        tb$tableBorderOpacity,
+        ");"
+      ),
       "}",
       "",
       ".reveal table tr:nth-child(even) td {",
