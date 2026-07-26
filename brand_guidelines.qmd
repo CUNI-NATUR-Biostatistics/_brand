@@ -492,17 +492,234 @@ Avoid expanding the palette unless strictly necessary.
   data vs model overlays
 - Never place more than two distinct figures on a single slide
 
+### Presentation crafting contract
+
+The template presentation contains a working gallery of the available
+RevealJS components. The rules below are the canonical decision guide for
+using that gallery in a real lesson.
+
+- Build each concept as **data moment → observation or prediction → concept
+  name → formalisation**. A statistical term should not open its own concept
+  block.
+- Give each slide one dominant message or teaching move.
+- Alternate structured components with plain figures, code/output layouts,
+  short questions, and minimal transitions.
+- In any run of five consecutive slides, no more than three should use a named
+  card, panel, box, blockquote, or strip as the primary visual element.
+- Colour has semantic meaning: graphite or grey for observed data,
+  indigo_velvet for models and estimates, and orange for interpretation,
+  uncertainty, or warnings.
+- Match highlighted words to the corresponding marks, lines, intervals, and
+  component accents on the slide.
+
+Learning outcomes are a stable exception to the general preference for more
+visual slide structures. They should remain a concise, incremental **bullet
+list**, not a grid of panels or cards. Use inline highlights inside the bullets
+to make the statistical contrasts easy to scan:
+
+```markdown
+## Výsledky učení
+
+Po dnešní přednášce budete schopni:
+
+::: {.incremental}
+- rozlišit [odhad efektu]{.text-hgl-indigo_velvet}
+  od jeho [nejistoty]{.text-hgl-orange}
+- interpretovat [95% interval spolehlivosti]{.text-hgl-orange}
+- zapsat výsledek s [odhadem]{.text-hgl-indigo_velvet},
+  [intervalem a jednotkami]{.text-hgl-orange}
+:::
+```
+
+### Five slide families
+
+A coherent lecture cycles through five functional slide families. Students
+should be able to recognise what a slide is asking them to do before reading
+every word.
+
+|Family|Purpose|Typical treatment|
+|---|---|---|
+|Interaction|prediction, MCQ, think-pair-share, silent write|plain bold question or `.panel-question`|
+|Data reveal|new graph, table, code output, or visual layer|full-width visual or code/output layout|
+|Interpretation|read the evidence and state what it supports|graph plus `.panel-result`, `.strip-*`, or `.takeaway-strip`|
+|Rule or warning|heuristic, misconception, limitation|`.card-rule`, `.card-warning`, or light warning panel|
+|Transition or summary|reset attention, connect blocks, close the lesson|minimal prompt, short bullet summary, or compact blockquote|
+
+No block of five or more slides should consist of only one family. Repetition
+is justified when the same-data-one-new-layer sequence is itself the teaching
+move, but the sequence should then end with a visibly different interpretation
+or checkpoint slide.
+
+### Component hierarchy
+
+Choose the lightest component that communicates the intended structure.
+
+|Family|Visual weight|Use for|Do not use for|
+|---|---|---|---|
+|Plain slide|none|full-width graph, short prompt, transition, learning outcomes|ordinary long explanation|
+|`.panel-*`|light|question, result, data context, short comparison|turning every bullet into a separate tile|
+|`.card-*`|heavy|rule, misconception, warning, major decision|routine conclusions or repeated prompts|
+|`.strip-*`|light and horizontal|one closing statement, workflow step, semantic takeaway|multi-paragraph explanation or a second slide heading|
+|`.takeaway-strip`|light and prominent|the main conclusion that closes a slide or short sequence|every interaction instruction|
+|`.blockquote`|medium|short definition, biological frame, quoted principle|generic body prose|
+
+The `.box-*` names are semantic aliases. Their visual weight is not uniform:
+
+|Alias|Maps to|Weight|Primary use|
+|---|---|---|---|
+|`.box-question`|`.panel-question`|light|MCQ or reflection question|
+|`.box-result`|`.panel-result`|light|main analytical result|
+|`.box-data`|`.panel-data`|light|dataset or measurement context|
+|`.box-rule`|`.card-rule`|heavy|rule or first-choice heuristic|
+|`.box-warning`|`.card-warning`|heavy|methodological warning|
+
+Panels use `[text]{.panel-title}` or `[text]{.panel-lead}` for their internal
+heading. Cards use `[text]{.card-title}` as the first element so the coloured
+top band is generated correctly.
+
+### Panels and cards
+
+Use panels when the information benefits from a visible category but should
+remain part of the normal slide flow:
+
+```markdown
+::: {.panel-result}
+[Co už víme]{.panel-title}
+
+Směr vztahu je kladný a odhad sklonu je 4,05 g/mm.
+:::
+```
+
+Use cards only when the content must carry more visual weight:
+
+```markdown
+::: {.card-warning}
+[Pozor na interpretaci]{.card-title}
+
+Viditelná asociace sama o sobě neprokazuje kauzalitu.
+:::
+```
+
+Contrasting panels are appropriate when the contrast itself is the concept,
+for example “co už víme” versus “co ještě nevíme”. Do not use a two-by-two panel
+grid merely to make an ordinary list look more designed.
+
+### Strips and takeaway strips
+
+Strips are the lowest-weight named component. They keep a short conclusion
+attached to the evidence above it without turning the entire slide into a
+panel. Use no more than one dominant strip on a slide.
+
+```markdown
+::: {.strip-indigo}
+Sklon říká, jak rychle se mění průměrná odezva s prediktorem.
+:::
+
+::: {.strip-orange}
+Šířka intervalu vyjadřuje nejistotu odhadu.
+:::
+
+::: {.takeaway-strip}
+**Hlavní závěr.** Uvádíme velikost efektu i její nejistotu.
+:::
+```
+
+Semantic strip variants:
+
+|Class|Meaning|
+|---|---|
+|`.strip-indigo`|model, estimate, or statistical result|
+|`.strip-orange`|interpretation, uncertainty, or point requiring attention|
+|`.strip-amethyst`|reasoning step, method, or rule|
+|`.strip-olive`|data context or descriptive observation|
+|`.strip-red`|error, invalid inference, or serious warning|
+|`.takeaway-strip`|cross-layer conclusion using the brand gradient|
+
+Add `.strip-compact` only when two closely related conclusions genuinely need
+reduced vertical spacing. A strip should contain one sentence or one compact
+list, not a paragraph of lecture notes.
+
+### Inline highlights
+
+Use `.text-hgl-*` primarily inside body text, bullets, questions, and takeaway
+sentences. Highlighting only slide headings does not help students scan a
+verbose slide.
+
+```markdown
+Naměřený bod je [pozorování]{.text-hgl-graphite}, fialový bod je
+[odhad modelu]{.text-hgl-indigo_velvet} a vzdálenost mezi nimi je
+[residuum]{.text-hgl-orange}.
+```
+
+Available highlight colours are `indigo_velvet`, `orange`, `amethyst`,
+`grey_olive`, `graphite`, `white`, `light_gray`, and `parchment`. Prefer the
+three semantic colours. Never assign a highlighted word a colour that
+contradicts the figure or legend representing the same concept.
+
+### Blockquotes, backgrounds, and layout utilities
+
+Use `::: {.blockquote}` for one short definition, biological framing
+statement, or quoted principle. Use the styled div rather than Markdown `>`
+syntax. A blockquote is not a general-purpose text box.
+
+Background classes are appropriate for true divider or reset slides:
+
+|Background|Text treatment|Recommended use|
+|---|---|---|
+|`.bg-indigo`, `.bg-amethyst`, `.bg-olive`, `.bg-red`, `.bg-graphite`|white text|rare section divider or major reset|
+|`.bg-orange`, `.bg-white`, `.bg-parchment`|graphite text|light divider, contrast slide, or example comparison|
+
+Do not use background changes merely to make a routine content slide look
+different. The colour must reinforce the function of the slide.
+
+Use `::: {.columns .align-top}` when unequal columns should begin at the same
+vertical position. Plain `.columns` may remain vertically centred when that
+balance is intentional. The utility classes `.slide-margin-top-15`,
+`.slide-margin-top-25`, and `.center-vertical` are available for isolated
+elements, but normal document flow is preferred whenever possible.
+
+### Roughnotation
+
+The `quarto-roughnotation` shorthand is a live-teaching accent, not a second
+component system:
+
+```markdown
+[klíčová fráze]{.rn-underline-indigo}
+[0,76]{.rn-circle-orange}
+[část vzorce]{.rn-bracket-indigo}
+```
+
+Use at most one roughnotation mark on a typical slide and only a few across a
+lecture. It may underline one phrase, circle one result, or bracket one part of
+an equation after students have had time to look. Do not annotate paragraphs,
+decorate all answer choices, or combine several roughnotation colours on one
+slide. A semantic text highlight or direct plot annotation is the default;
+roughnotation is reserved for a deliberate live gesture.
+
 ### Progressive disclosure
 
 - Reveal layers in this order: data (grey) → model (purple) → interpretation (orange callout)
 - Use RevealJS fragments or incremental list options
 - Never show a model result before posing a prediction question to the audience
+- Use `.incremental` for learning outcomes and lists in which each item is a
+  new idea.
+- Wrap a complete panel, card, or strip in `.fragment` when the whole component
+  should appear after discussion.
+- Progressive disclosure should reveal reasoning, not merely slow down a list
+  that students could read more clearly at once.
 
 ### Interaction slides
 
-- Mark interaction slides with a thick `indigo_velvet` left border or a distinct callout block
-- The word "Otázka" or "Diskuze" can be accented in `orange`
-- Keep ALL interaction slides visually consistent within a single lecture
+- Make interaction slides recognisable, but vary their furniture across the
+  lecture: voting cards, a light question panel, a silent-write prompt, or an
+  unframed centred question can all be appropriate.
+- Use the same visual treatment for all answer options within one question.
+- Reveal the correct answer only after students commit; add one
+  brand-consistent cue rather than restyling the whole option.
+- The word "Otázka" or "Diskuze" may be accented in orange, but the task itself
+  must remain the dominant element.
+- Follow a prediction with a result and a visible interpretation or
+  checkpoint.
 
 ### Code display on slides
 
@@ -546,6 +763,21 @@ Use `tip` only with the Czech heading **Doplňující** (optionally followed by 
 - Every figure requires a caption that **interprets** the figure — not just describes it
 - Default width: `out.width = "80%"` for HTML; `out.width = "100%"` for Typst/PDF
 - Always include `fig-alt` alt text for accessibility
+
+### Markdown tables
+
+Markdown tables use one shared treatment across skripta HTML, Typst/PDF, and
+RevealJS:
+
+- full available width, with wrapping inside cells;
+- indigo_velvet header with white bold text;
+- visible but quiet borders between cells;
+- sufficient cell padding for scanning;
+- alternating white and parchment/light-gray body rows.
+
+These rules are generated from `quarto/custom_theme.json`. Do not restyle an
+individual lesson table to compensate for unformatted PDF defaults; correct the
+shared generator and visually verify representative HTML and Typst/PDF tables.
 
 ### Interactive HTML components
 
