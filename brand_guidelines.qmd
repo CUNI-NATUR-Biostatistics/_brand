@@ -5,6 +5,8 @@ author: "Ondřej Mottl"
 lang: en
 date: 2026/03/26
 date-modified: last-modified
+filters:
+  - lua/semantic-boxes.lua
 ---
 
 ```{r}
@@ -930,18 +932,41 @@ roughnotation is reserved for a deliberate live gesture.
 - TOC: always shown (`toc: true`, `toc-depth: 3`), left sidebar in HTML
 - Section numbering: always enabled (`number-sections: true`)
 
-### Callout blocks
+### Semantic boxes
 
-Use Quarto callouts for exactly four purposes:
+Use the same semantic `.box-*` vocabulary in learning materials and presentations. In learning materials, `theme/semantic-boxes.lua` converts these fenced divs into native Quarto callouts so they work in both HTML and Typst/PDF.
 
-| Callout type | Purpose | Accent colour |
+| Source class | Purpose | Accent colour |
 | ------------ | ------- | ------------- |
-| `note` | Supplementary explanation, extra detail | indigo_velvet (SCSS customised) |
-| `tip` | Optional technical context that is not needed for the main argument | grey_olive |
-| `important` | Key concept or definition the student must retain | indigo_velvet |
-| `warning` | Common mistake or statistical misconception | orange |
+| `.box-question` | Student question, prediction, or interpretation prompt | orange |
+| `.box-result` | Main analytical result or conclusion | indigo_velvet |
+| `.box-data` | Dataset, measurement, or optional technical context | grey_olive |
+| `.box-rule` | Definition, decision rule, or durable heuristic | amethyst |
+| `.box-warning` | Common mistake or methodological warning | red |
 
-Use `tip` only with the Czech heading **Doplňující** (optionally followed by a short descriptor). For a long optional code example, place a brief `tip` callout before the code and fold the code in HTML; the code remains in the normal page flow in PDF. A short self-contained technical example may instead be placed directly in a collapsible `tip` callout, which remains expanded in PDF. Avoid `caution` and do not invent further callout types.
+Give every box a descriptive Czech `title`; do not use generic headings such as **Důležité**. Use `.box-data` with a heading beginning **Doplňující** for optional technical material. A long optional code example can follow a brief collapsible `.box-data`; a short self-contained example may sit inside it. Keep the body concise enough that the semantic role remains immediately visible.
+
+#### Rendered examples
+
+::: {.box-question title="Než zobrazíte výsledek"}
+Jaký biologický vzorec byste v grafu očekávali, kdyby byla pracovní hypotéza správná?
+:::
+
+::: {.box-result title="Co ukázala analýza"}
+Odhadnutý vztah je kladný a jeho velikost je biologicky dostatečně výrazná, aby stálo za to posoudit jeho nejistotu.
+:::
+
+::: {.box-data title="Doplňující: odkud pocházejí data" collapse="true"}
+Tento box je určen pro původ dat, způsob měření nebo volitelný technický detail, který není nutný pro hlavní argument.
+:::
+
+::: {.box-rule title="Pravidlo pro interpretaci"}
+Nejprve popište velikost efektu v jednotkách měření, teprve potom jeho nejistotu a další statistické důkazy.
+:::
+
+::: {.box-warning title="Pozor na záměnu jednotek"}
+Jednotka řádku v datové tabulce nemusí být stejná jako jednotka nezávislé informace v modelu.
+:::
 
 ### Colour in prose
 
