@@ -615,27 +615,218 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="standard-course-ggplot2-theme-theme_biostat" class="level3" data-number="9.2">
 <h3 data-number="9.2" class="anchored" data-anchor-id="standard-course-ggplot2-theme-theme_biostat"><span class="header-section-number">9.2</span> Standard course ggplot2 theme (<code>theme_biostat</code>)</h3>
 <p>Course figures use <code>theme_biostat()</code> by default. It is defined in each lesson’s generated <code>R/set_r_theme.R</code> and installed globally with <code>theme_set()</code>, so adding it to every plot is unnecessary. A lesson may deliberately replace the complete theme when students are learning to construct a figure themselves; such an override is a pedagogical choice, not a brand synchronization failure.</p>
-<p>The generated theme chooses its outer background by output format: parchment in HTML, white in PDF and ordinary R use. The data panel remains white. This avoids visible figure cards in PDF while preserving the parchment HTML surface without depending on graphics-device transparency.</p>
+<p>The generated theme switches both the outer figure margin and the data panel by output format. HTML uses a parchment outer margin and a white data panel. Typst learning-material PDFs use a white outer margin and a parchment data panel. A RevealJS PDF export preserves the HTML figure, including its white data panel.</p>
 <p>Reference implementation:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>theme_biostat <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">base_size =</span> <span class="dv">11</span>, <span class="at">base_family =</span> <span class="st">"Source Sans 3"</span>) {</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  output_background <span class="ot">&lt;-</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (knitr<span class="sc">::</span><span class="fu">is_html_output</span>()) <span class="st">"#F4F1EC"</span> <span class="cf">else</span> <span class="st">"#FFFFFF"</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>(<span class="at">base_size =</span> base_size, <span class="at">base_family =</span> base_family) <span class="sc">+</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.background   =</span> ggplot2<span class="sc">::</span><span class="fu">element_rect</span>(<span class="at">fill =</span> output_background, <span class="at">colour =</span> <span class="cn">NA</span>),</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.background  =</span> ggplot2<span class="sc">::</span><span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">colour =</span> <span class="cn">NA</span>),</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.minor  =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.border      =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.line         =</span> ggplot2<span class="sc">::</span><span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"#2E2E2E"</span>, <span class="at">linewidth =</span> <span class="fl">0.4</span>),</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.text         =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#2E2E2E"</span>),</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.title        =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#2E2E2E"</span>),</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title        =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#2E2E2E"</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.background =</span> ggplot2<span class="sc">::</span><span class="fu">element_rect</span>(<span class="at">fill =</span> output_background, <span class="at">colour =</span> <span class="cn">NA</span>),</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.key        =</span> ggplot2<span class="sc">::</span><span class="fu">element_rect</span>(<span class="at">fill =</span> output_background, <span class="at">colour =</span> <span class="cn">NA</span>),</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.position   =</span> <span class="st">"bottom"</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  is_html_output <span class="ot">&lt;-</span> knitr<span class="sc">::</span><span class="fu">is_html_output</span>()</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  output_background <span class="ot">&lt;-</span> <span class="cf">if</span> (is_html_output) <span class="st">"#F4F1EC"</span> <span class="cf">else</span> <span class="st">"#FFFFFF"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  panel_background <span class="ot">&lt;-</span> <span class="cf">if</span> (is_html_output) <span class="st">"#FFFFFF"</span> <span class="cf">else</span> <span class="st">"#F4F1EC"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>(<span class="at">base_size =</span> base_size, <span class="at">base_family =</span> base_family) <span class="sc">+</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.background   =</span> ggplot2<span class="sc">::</span><span class="fu">element_rect</span>(<span class="at">fill =</span> output_background, <span class="at">colour =</span> <span class="cn">NA</span>),</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.background  =</span> ggplot2<span class="sc">::</span><span class="fu">element_rect</span>(<span class="at">fill =</span> panel_background, <span class="at">colour =</span> <span class="cn">NA</span>),</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.minor  =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.border      =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.line         =</span> ggplot2<span class="sc">::</span><span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"#2E2E2E"</span>, <span class="at">linewidth =</span> <span class="fl">0.4</span>),</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.text         =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#2E2E2E"</span>),</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.title        =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#2E2E2E"</span>),</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title        =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#2E2E2E"</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.background =</span> ggplot2<span class="sc">::</span><span class="fu">element_rect</span>(<span class="at">fill =</span> output_background, <span class="at">colour =</span> <span class="cn">NA</span>),</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.key        =</span> ggplot2<span class="sc">::</span><span class="fu">element_rect</span>(<span class="at">fill =</span> panel_background, <span class="at">colour =</span> <span class="cn">NA</span>),</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.position   =</span> <span class="st">"bottom"</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="rendered-appearance-across-course-outputs" class="level3" data-number="9.3">
+<h3 data-number="9.3" class="anchored" data-anchor-id="rendered-appearance-across-course-outputs"><span class="header-section-number">9.3</span> Rendered appearance across course outputs</h3>
+<p>HTML documents and RevealJS slides use parchment surfaces with a <strong>white data panel</strong>. Learning-material PDFs reverse that contrast: the page and outer plot margin are white, while the data panel is parchment. A PDF export of a RevealJS presentation preserves the rendered HTML slide and its white data panel; it is not a separate Typst or knitr PDF render.</p>
+<style>
+.figure-render-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.1rem;
+  margin: 1rem 0 1.4rem;
+}
+.figure-render-card {
+  border: 1px solid rgba(46, 46, 46, 0.18);
+  border-radius: 0.45rem;
+  background: #FFFFFF;
+  padding: 0.8rem;
+}
+.figure-render-card h4 {
+  color: #5D2890;
+  font-size: 1rem;
+  margin: 0 0 0.2rem;
+}
+.figure-render-card p {
+  color: #2E2E2E;
+  font-size: 0.88rem;
+  margin: 0 0 0.7rem;
+}
+.render-surface {
+  border: 1px solid rgba(46, 46, 46, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem;
+}
+.render-surface.document {
+  min-height: 15rem;
+}
+.render-surface.slide {
+  aspect-ratio: 16 / 9;
+}
+.surface-parchment,
+.figure-outer-parchment {
+  background: #F4F1EC;
+}
+.surface-white,
+.figure-outer-white {
+  background: #FFFFFF;
+}
+.mini-figure {
+  width: min(92%, 23rem);
+  padding: 0.55rem 0.7rem 0.7rem;
+}
+.mini-figure-title {
+  color: #2E2E2E;
+  font-family: "Atkinson Hyperlegible", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+.mini-figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+@media (max-width: 760px) {
+  .figure-render-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+<div class="figure-render-grid">
+  <section class="figure-render-card">
+    <h4 class="anchored">Learning materials · HTML</h4>
+    <p>Parchment page · parchment figure margin · white data panel</p>
+    <div class="render-surface document surface-parchment">
+      <div class="mini-figure figure-outer-parchment">
+        <div class="mini-figure-title">Observed data and fitted relationship</div>
+        <svg viewbox="0 0 300 180" role="img" aria-label="Branded scatter plot on a parchment panel">
+          <rect x="42" y="12" width="242" height="132" fill="#FFFFFF"></rect>
+          <g stroke="#DEDAD3" stroke-width="1"><line x1="42" y1="45" x2="284" y2="45"></line><line x1="42" y1="78" x2="284" y2="78"></line><line x1="42" y1="111" x2="284" y2="111"></line></g>
+          <g stroke="#2E2E2E" stroke-width="1.5"><line x1="42" y1="12" x2="42" y2="144"></line><line x1="42" y1="144" x2="284" y2="144"></line></g>
+          <g fill="#8A8A8A" fill-opacity="0.62"><circle cx="65" cy="127" r="4"></circle><circle cx="89" cy="116" r="4"></circle><circle cx="116" cy="104" r="4"></circle><circle cx="145" cy="93" r="4"></circle><circle cx="169" cy="79" r="4"></circle><circle cx="203" cy="70" r="4"></circle><circle cx="229" cy="51" r="4"></circle><circle cx="261" cy="39" r="4"></circle></g>
+          <line x1="58" y1="130" x2="270" y2="34" stroke="#5D2890" stroke-width="4"></line>
+          <text x="163" y="170" text-anchor="middle" fill="#2E2E2E" font-size="12">Predictor (units)</text>
+          <text x="15" y="78" text-anchor="middle" fill="#2E2E2E" font-size="12" transform="rotate(-90 15 78)">Response (units)</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="figure-render-card">
+    <h4 class="anchored">Learning materials · PDF</h4>
+    <p>White page · white figure margin · parchment data panel</p>
+    <div class="render-surface document surface-white">
+      <div class="mini-figure figure-outer-white">
+        <div class="mini-figure-title">Observed data and fitted relationship</div>
+        <svg viewbox="0 0 300 180" role="img" aria-label="Branded scatter plot with a parchment panel on a white PDF page">
+          <rect x="42" y="12" width="242" height="132" fill="#F4F1EC"></rect>
+          <g stroke="#DEDAD3" stroke-width="1"><line x1="42" y1="45" x2="284" y2="45"></line><line x1="42" y1="78" x2="284" y2="78"></line><line x1="42" y1="111" x2="284" y2="111"></line></g>
+          <g stroke="#2E2E2E" stroke-width="1.5"><line x1="42" y1="12" x2="42" y2="144"></line><line x1="42" y1="144" x2="284" y2="144"></line></g>
+          <g fill="#8A8A8A" fill-opacity="0.62"><circle cx="65" cy="127" r="4"></circle><circle cx="89" cy="116" r="4"></circle><circle cx="116" cy="104" r="4"></circle><circle cx="145" cy="93" r="4"></circle><circle cx="169" cy="79" r="4"></circle><circle cx="203" cy="70" r="4"></circle><circle cx="229" cy="51" r="4"></circle><circle cx="261" cy="39" r="4"></circle></g>
+          <line x1="58" y1="130" x2="270" y2="34" stroke="#5D2890" stroke-width="4"></line>
+          <text x="163" y="170" text-anchor="middle" fill="#2E2E2E" font-size="12">Predictor (units)</text>
+          <text x="15" y="78" text-anchor="middle" fill="#2E2E2E" font-size="12" transform="rotate(-90 15 78)">Response (units)</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="figure-render-card">
+    <h4 class="anchored">Presentation · HTML</h4>
+    <p>Parchment slide · parchment figure margin · white data panel</p>
+    <div class="render-surface slide surface-parchment">
+      <div class="mini-figure figure-outer-parchment">
+        <div class="mini-figure-title">Observed data and fitted relationship</div>
+        <svg viewbox="0 0 300 180" role="img" aria-label="Branded scatter plot on a parchment RevealJS slide">
+          <rect x="42" y="12" width="242" height="132" fill="#FFFFFF"></rect>
+          <g stroke="#DEDAD3" stroke-width="1"><line x1="42" y1="45" x2="284" y2="45"></line><line x1="42" y1="78" x2="284" y2="78"></line><line x1="42" y1="111" x2="284" y2="111"></line></g>
+          <g stroke="#2E2E2E" stroke-width="1.5"><line x1="42" y1="12" x2="42" y2="144"></line><line x1="42" y1="144" x2="284" y2="144"></line></g>
+          <g fill="#8A8A8A" fill-opacity="0.62"><circle cx="65" cy="127" r="4"></circle><circle cx="89" cy="116" r="4"></circle><circle cx="116" cy="104" r="4"></circle><circle cx="145" cy="93" r="4"></circle><circle cx="169" cy="79" r="4"></circle><circle cx="203" cy="70" r="4"></circle><circle cx="229" cy="51" r="4"></circle><circle cx="261" cy="39" r="4"></circle></g>
+          <line x1="58" y1="130" x2="270" y2="34" stroke="#5D2890" stroke-width="4"></line>
+          <text x="163" y="170" text-anchor="middle" fill="#2E2E2E" font-size="12">Predictor (units)</text>
+          <text x="15" y="78" text-anchor="middle" fill="#2E2E2E" font-size="12" transform="rotate(-90 15 78)">Response (units)</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="figure-render-card">
+    <h4 class="anchored">Presentation · PDF export</h4>
+    <p>Parchment slide · parchment figure margin · white data panel</p>
+    <div class="render-surface slide surface-parchment">
+      <div class="mini-figure figure-outer-parchment">
+        <div class="mini-figure-title">Observed data and fitted relationship</div>
+        <svg viewbox="0 0 300 180" role="img" aria-label="Branded scatter plot in a PDF export of a RevealJS slide">
+          <rect x="42" y="12" width="242" height="132" fill="#FFFFFF"></rect>
+          <g stroke="#DEDAD3" stroke-width="1"><line x1="42" y1="45" x2="284" y2="45"></line><line x1="42" y1="78" x2="284" y2="78"></line><line x1="42" y1="111" x2="284" y2="111"></line></g>
+          <g stroke="#2E2E2E" stroke-width="1.5"><line x1="42" y1="12" x2="42" y2="144"></line><line x1="42" y1="144" x2="284" y2="144"></line></g>
+          <g fill="#8A8A8A" fill-opacity="0.62"><circle cx="65" cy="127" r="4"></circle><circle cx="89" cy="116" r="4"></circle><circle cx="116" cy="104" r="4"></circle><circle cx="145" cy="93" r="4"></circle><circle cx="169" cy="79" r="4"></circle><circle cx="203" cy="70" r="4"></circle><circle cx="229" cy="51" r="4"></circle><circle cx="261" cy="39" r="4"></circle></g>
+          <line x1="58" y1="130" x2="270" y2="34" stroke="#5D2890" stroke-width="4"></line>
+          <text x="163" y="170" text-anchor="middle" fill="#2E2E2E" font-size="12">Predictor (units)</text>
+          <text x="15" y="78" text-anchor="middle" fill="#2E2E2E" font-size="12" transform="rotate(-90 15 78)">Response (units)</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Course output</th>
+<th>Page or slide surface</th>
+<th>Outer plot margin</th>
+<th>Data panel</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Learning materials — HTML</td>
+<td>parchment</td>
+<td>parchment</td>
+<td>white</td>
+</tr>
+<tr class="even">
+<td>Learning materials — Typst PDF</td>
+<td>white</td>
+<td>white</td>
+<td>parchment</td>
+</tr>
+<tr class="odd">
+<td>RevealJS presentation — HTML</td>
+<td>parchment</td>
+<td>parchment</td>
+<td>white</td>
+</tr>
+<tr class="even">
+<td>RevealJS presentation — browser PDF export</td>
+<td>parchment</td>
+<td>parchment</td>
+<td>white</td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="example-scatter-plot-data-only" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="example-scatter-plot-data-only">Example: scatter plot (data only)</h3>
@@ -661,7 +852,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(</span>
 <span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">x     =</span> <span class="st">"Predictor variable (units)"</span>,</span>
 <span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">y     =</span> <span class="st">"Response variable (units)"</span>,</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Data only — grey points on a white data panel"</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Data only — grey points on the course data panel"</span></span>
 <span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_biostat</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
@@ -693,7 +884,7 @@ font family not found in Windows font database</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="brand_guidelines_files/figure-html/example-scatter-data-1.png" class="img-fluid figure-img" alt="Example scatter plot showing grey data points on a parchment background" width="576"></p>
+<p><img src="brand_guidelines_files/figure-html/example-scatter-data-1.png" class="img-fluid figure-img" alt="Example scatter plot showing grey data points on the format-specific course panel" width="576"></p>
 </figure>
 </div>
 </div>

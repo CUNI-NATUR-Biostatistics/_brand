@@ -42,8 +42,9 @@ theme_biostat <- function(
   base_size = 11,
   base_family = "Source Sans 3"
 ) {
-  output_background <-
-    if (knitr::is_html_output()) clr_bg else "white"
+  is_html_output <- knitr::is_html_output()
+  output_background <- if (is_html_output) clr_bg else "white"
+  panel_background <- if (is_html_output) "white" else clr_bg
 
   ggplot2::theme_bw(
     base_size = base_size,
@@ -53,13 +54,13 @@ theme_biostat <- function(
       text = ggplot2::element_text(colour = clr_text),
       panel.border = ggplot2::element_blank(),
       axis.line = ggplot2::element_line(colour = clr_text, linewidth = 0.4),
-      panel.background = ggplot2::element_rect(fill = "white", colour = NA),
+      panel.background = ggplot2::element_rect(fill = panel_background, colour = NA),
       plot.background = ggplot2::element_rect(fill = output_background, colour = NA),
       legend.background = ggplot2::element_rect(
         fill = output_background,
         colour = NA
       ),
-      legend.key = ggplot2::element_rect(fill = output_background, colour = NA),
+      legend.key = ggplot2::element_rect(fill = panel_background, colour = NA),
       panel.grid.minor = ggplot2::element_blank(),
       legend.position = "bottom"
     )
@@ -348,22 +349,23 @@ it to every plot is unnecessary. A lesson may deliberately replace the complete
 theme when students are learning to construct a figure themselves; such an
 override is a pedagogical choice, not a brand synchronization failure.
 
-The generated theme chooses its outer background by output format: parchment in
-HTML, white in PDF and ordinary R use. The data panel remains white. This avoids
-visible figure cards in PDF while preserving the parchment HTML surface without
-depending on graphics-device transparency.
+The generated theme switches both the outer figure margin and the data panel by
+output format. HTML uses a parchment outer margin and a white data panel. Typst
+learning-material PDFs use a white outer margin and a parchment data panel. A
+RevealJS PDF export preserves the HTML figure, including its white data panel.
 
 Reference implementation:
 
 ```r
 theme_biostat <- function(base_size = 11, base_family = "Source Sans 3") {
-  output_background <-
-    if (knitr::is_html_output()) "#F4F1EC" else "#FFFFFF"
+  is_html_output <- knitr::is_html_output()
+  output_background <- if (is_html_output) "#F4F1EC" else "#FFFFFF"
+  panel_background <- if (is_html_output) "#FFFFFF" else "#F4F1EC"
 
   ggplot2::theme_bw(base_size = base_size, base_family = base_family) +
     ggplot2::theme(
       plot.background   = ggplot2::element_rect(fill = output_background, colour = NA),
-      panel.background  = ggplot2::element_rect(fill = "white", colour = NA),
+      panel.background  = ggplot2::element_rect(fill = panel_background, colour = NA),
       panel.grid.minor  = ggplot2::element_blank(),
       panel.border      = ggplot2::element_blank(),
       axis.line         = ggplot2::element_line(colour = "#2E2E2E", linewidth = 0.4),
@@ -371,11 +373,173 @@ theme_biostat <- function(base_size = 11, base_family = "Source Sans 3") {
       axis.title        = ggplot2::element_text(colour = "#2E2E2E"),
       plot.title        = ggplot2::element_text(colour = "#2E2E2E", face = "bold"),
       legend.background = ggplot2::element_rect(fill = output_background, colour = NA),
-      legend.key        = ggplot2::element_rect(fill = output_background, colour = NA),
+      legend.key        = ggplot2::element_rect(fill = panel_background, colour = NA),
       legend.position   = "bottom"
     )
 }
 ```
+
+### Rendered appearance across course outputs
+
+HTML documents and RevealJS slides use parchment surfaces with a **white data
+panel**. Learning-material PDFs reverse that contrast: the page and outer plot
+margin are white, while the data panel is parchment. A PDF export of a RevealJS
+presentation preserves the rendered HTML slide and its white data panel; it is
+not a separate Typst or knitr PDF render.
+
+```{=html}
+<style>
+.figure-render-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.1rem;
+  margin: 1rem 0 1.4rem;
+}
+.figure-render-card {
+  border: 1px solid rgba(46, 46, 46, 0.18);
+  border-radius: 0.45rem;
+  background: #FFFFFF;
+  padding: 0.8rem;
+}
+.figure-render-card h4 {
+  color: #5D2890;
+  font-size: 1rem;
+  margin: 0 0 0.2rem;
+}
+.figure-render-card p {
+  color: #2E2E2E;
+  font-size: 0.88rem;
+  margin: 0 0 0.7rem;
+}
+.render-surface {
+  border: 1px solid rgba(46, 46, 46, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem;
+}
+.render-surface.document {
+  min-height: 15rem;
+}
+.render-surface.slide {
+  aspect-ratio: 16 / 9;
+}
+.surface-parchment,
+.figure-outer-parchment {
+  background: #F4F1EC;
+}
+.surface-white,
+.figure-outer-white {
+  background: #FFFFFF;
+}
+.mini-figure {
+  width: min(92%, 23rem);
+  padding: 0.55rem 0.7rem 0.7rem;
+}
+.mini-figure-title {
+  color: #2E2E2E;
+  font-family: "Atkinson Hyperlegible", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+.mini-figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+@media (max-width: 760px) {
+  .figure-render-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+<div class="figure-render-grid">
+  <section class="figure-render-card">
+    <h4>Learning materials · HTML</h4>
+    <p>Parchment page · parchment figure margin · white data panel</p>
+    <div class="render-surface document surface-parchment">
+      <div class="mini-figure figure-outer-parchment">
+        <div class="mini-figure-title">Observed data and fitted relationship</div>
+        <svg viewBox="0 0 300 180" role="img" aria-label="Branded scatter plot on a parchment panel">
+          <rect x="42" y="12" width="242" height="132" fill="#FFFFFF"/>
+          <g stroke="#DEDAD3" stroke-width="1"><line x1="42" y1="45" x2="284" y2="45"/><line x1="42" y1="78" x2="284" y2="78"/><line x1="42" y1="111" x2="284" y2="111"/></g>
+          <g stroke="#2E2E2E" stroke-width="1.5"><line x1="42" y1="12" x2="42" y2="144"/><line x1="42" y1="144" x2="284" y2="144"/></g>
+          <g fill="#8A8A8A" fill-opacity="0.62"><circle cx="65" cy="127" r="4"/><circle cx="89" cy="116" r="4"/><circle cx="116" cy="104" r="4"/><circle cx="145" cy="93" r="4"/><circle cx="169" cy="79" r="4"/><circle cx="203" cy="70" r="4"/><circle cx="229" cy="51" r="4"/><circle cx="261" cy="39" r="4"/></g>
+          <line x1="58" y1="130" x2="270" y2="34" stroke="#5D2890" stroke-width="4"/>
+          <text x="163" y="170" text-anchor="middle" fill="#2E2E2E" font-size="12">Predictor (units)</text>
+          <text x="15" y="78" text-anchor="middle" fill="#2E2E2E" font-size="12" transform="rotate(-90 15 78)">Response (units)</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="figure-render-card">
+    <h4>Learning materials · PDF</h4>
+    <p>White page · white figure margin · parchment data panel</p>
+    <div class="render-surface document surface-white">
+      <div class="mini-figure figure-outer-white">
+        <div class="mini-figure-title">Observed data and fitted relationship</div>
+        <svg viewBox="0 0 300 180" role="img" aria-label="Branded scatter plot with a parchment panel on a white PDF page">
+          <rect x="42" y="12" width="242" height="132" fill="#F4F1EC"/>
+          <g stroke="#DEDAD3" stroke-width="1"><line x1="42" y1="45" x2="284" y2="45"/><line x1="42" y1="78" x2="284" y2="78"/><line x1="42" y1="111" x2="284" y2="111"/></g>
+          <g stroke="#2E2E2E" stroke-width="1.5"><line x1="42" y1="12" x2="42" y2="144"/><line x1="42" y1="144" x2="284" y2="144"/></g>
+          <g fill="#8A8A8A" fill-opacity="0.62"><circle cx="65" cy="127" r="4"/><circle cx="89" cy="116" r="4"/><circle cx="116" cy="104" r="4"/><circle cx="145" cy="93" r="4"/><circle cx="169" cy="79" r="4"/><circle cx="203" cy="70" r="4"/><circle cx="229" cy="51" r="4"/><circle cx="261" cy="39" r="4"/></g>
+          <line x1="58" y1="130" x2="270" y2="34" stroke="#5D2890" stroke-width="4"/>
+          <text x="163" y="170" text-anchor="middle" fill="#2E2E2E" font-size="12">Predictor (units)</text>
+          <text x="15" y="78" text-anchor="middle" fill="#2E2E2E" font-size="12" transform="rotate(-90 15 78)">Response (units)</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="figure-render-card">
+    <h4>Presentation · HTML</h4>
+    <p>Parchment slide · parchment figure margin · white data panel</p>
+    <div class="render-surface slide surface-parchment">
+      <div class="mini-figure figure-outer-parchment">
+        <div class="mini-figure-title">Observed data and fitted relationship</div>
+        <svg viewBox="0 0 300 180" role="img" aria-label="Branded scatter plot on a parchment RevealJS slide">
+          <rect x="42" y="12" width="242" height="132" fill="#FFFFFF"/>
+          <g stroke="#DEDAD3" stroke-width="1"><line x1="42" y1="45" x2="284" y2="45"/><line x1="42" y1="78" x2="284" y2="78"/><line x1="42" y1="111" x2="284" y2="111"/></g>
+          <g stroke="#2E2E2E" stroke-width="1.5"><line x1="42" y1="12" x2="42" y2="144"/><line x1="42" y1="144" x2="284" y2="144"/></g>
+          <g fill="#8A8A8A" fill-opacity="0.62"><circle cx="65" cy="127" r="4"/><circle cx="89" cy="116" r="4"/><circle cx="116" cy="104" r="4"/><circle cx="145" cy="93" r="4"/><circle cx="169" cy="79" r="4"/><circle cx="203" cy="70" r="4"/><circle cx="229" cy="51" r="4"/><circle cx="261" cy="39" r="4"/></g>
+          <line x1="58" y1="130" x2="270" y2="34" stroke="#5D2890" stroke-width="4"/>
+          <text x="163" y="170" text-anchor="middle" fill="#2E2E2E" font-size="12">Predictor (units)</text>
+          <text x="15" y="78" text-anchor="middle" fill="#2E2E2E" font-size="12" transform="rotate(-90 15 78)">Response (units)</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="figure-render-card">
+    <h4>Presentation · PDF export</h4>
+    <p>Parchment slide · parchment figure margin · white data panel</p>
+    <div class="render-surface slide surface-parchment">
+      <div class="mini-figure figure-outer-parchment">
+        <div class="mini-figure-title">Observed data and fitted relationship</div>
+        <svg viewBox="0 0 300 180" role="img" aria-label="Branded scatter plot in a PDF export of a RevealJS slide">
+          <rect x="42" y="12" width="242" height="132" fill="#FFFFFF"/>
+          <g stroke="#DEDAD3" stroke-width="1"><line x1="42" y1="45" x2="284" y2="45"/><line x1="42" y1="78" x2="284" y2="78"/><line x1="42" y1="111" x2="284" y2="111"/></g>
+          <g stroke="#2E2E2E" stroke-width="1.5"><line x1="42" y1="12" x2="42" y2="144"/><line x1="42" y1="144" x2="284" y2="144"/></g>
+          <g fill="#8A8A8A" fill-opacity="0.62"><circle cx="65" cy="127" r="4"/><circle cx="89" cy="116" r="4"/><circle cx="116" cy="104" r="4"/><circle cx="145" cy="93" r="4"/><circle cx="169" cy="79" r="4"/><circle cx="203" cy="70" r="4"/><circle cx="229" cy="51" r="4"/><circle cx="261" cy="39" r="4"/></g>
+          <line x1="58" y1="130" x2="270" y2="34" stroke="#5D2890" stroke-width="4"/>
+          <text x="163" y="170" text-anchor="middle" fill="#2E2E2E" font-size="12">Predictor (units)</text>
+          <text x="15" y="78" text-anchor="middle" fill="#2E2E2E" font-size="12" transform="rotate(-90 15 78)">Response (units)</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+</div>
+```
+
+| Course output | Page or slide surface | Outer plot margin | Data panel |
+|---|---|---|---|
+| Learning materials — HTML | parchment | parchment | white |
+| Learning materials — Typst PDF | white | white | parchment |
+| RevealJS presentation — HTML | parchment | parchment | white |
+| RevealJS presentation — browser PDF export | parchment | parchment | white |
 
 ### Example: scatter plot (data only) {.unnumbered}
 
@@ -384,7 +548,7 @@ theme_biostat <- function(base_size = 11, base_family = "Source Sans 3") {
 #| echo: true
 #| fig-width: 6
 #| fig-height: 4
-#| fig-alt: "Example scatter plot showing grey data points on a parchment background"
+#| fig-alt: "Example scatter plot showing grey data points on the format-specific course panel"
 
 # Synthetic data for illustration
 set.seed(1)
@@ -407,7 +571,7 @@ ggplot2::ggplot(
   ggplot2::labs(
     x     = "Predictor variable (units)",
     y     = "Response variable (units)",
-    title = "Data only — grey points on a white data panel"
+    title = "Data only — grey points on the course data panel"
   ) +
   theme_biostat()
 ```
