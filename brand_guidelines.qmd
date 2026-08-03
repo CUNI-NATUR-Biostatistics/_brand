@@ -37,6 +37,33 @@ clr_model2    <- primary[["amethyst"]]
 clr_highlight <- primary[["orange"]]
 clr_bg        <- primary[["parchment"]]
 clr_text      <- primary[["graphite"]]
+
+theme_biostat <- function(
+  base_size = 11,
+  base_family = "Source Sans 3"
+) {
+  output_background <-
+    if (knitr::is_html_output()) clr_bg else "white"
+
+  ggplot2::theme_bw(
+    base_size = base_size,
+    base_family = base_family
+  ) +
+    ggplot2::theme(
+      text = ggplot2::element_text(colour = clr_text),
+      panel.border = ggplot2::element_blank(),
+      axis.line = ggplot2::element_line(colour = clr_text, linewidth = 0.4),
+      panel.background = ggplot2::element_rect(fill = "white", colour = NA),
+      plot.background = ggplot2::element_rect(fill = output_background, colour = NA),
+      legend.background = ggplot2::element_rect(
+        fill = output_background,
+        colour = NA
+      ),
+      legend.key = ggplot2::element_rect(fill = output_background, colour = NA),
+      panel.grid.minor = ggplot2::element_blank(),
+      legend.position = "bottom"
+    )
+}
 ```
 
 ## Purpose
@@ -310,28 +337,42 @@ clr_data      <- "#8A8A8A"   # grey_olive    — raw observations
 clr_model     <- "#5D2890"   # indigo_velvet — primary model
 clr_model2    <- "#86579E"   # amethyst      — secondary model / comparison
 clr_highlight <- "#F3A712"   # orange        — emphasis / key result
-clr_bg        <- "#F4F1EC"   # parchment     — plot background
+clr_bg        <- "#F4F1EC"   # parchment     — HTML document background
 ```
 
 ### Standard course ggplot2 theme (`theme_biostat`)
 
-Every figure must end with `+ theme_biostat()`. Define this function once in each
-lecture's `R/set_r_theme.R` (generated automatically by `R/generate_theme.R`).
+Course figures use `theme_biostat()` by default. It is defined in each lesson's
+generated `R/set_r_theme.R` and installed globally with `theme_set()`, so adding
+it to every plot is unnecessary. A lesson may deliberately replace the complete
+theme when students are learning to construct a figure themselves; such an
+override is a pedagogical choice, not a brand synchronization failure.
+
+The generated theme chooses its outer background by output format: parchment in
+HTML, white in PDF and ordinary R use. The data panel remains white. This avoids
+visible figure cards in PDF while preserving the parchment HTML surface without
+depending on graphics-device transparency.
 
 Reference implementation:
 
 ```r
-theme_biostat <- function() {
-  ggplot2::theme_minimal(base_family = "Source Sans 3") +
+theme_biostat <- function(base_size = 11, base_family = "Source Sans 3") {
+  output_background <-
+    if (knitr::is_html_output()) "#F4F1EC" else "#FFFFFF"
+
+  ggplot2::theme_bw(base_size = base_size, base_family = base_family) +
     ggplot2::theme(
-      plot.background   = ggplot2::element_rect(fill = "#F4F1EC", colour = NA),
-      panel.background  = ggplot2::element_rect(fill = "#F4F1EC", colour = NA),
-      panel.grid.major  = ggplot2::element_line(colour = "#E0DDD8"),
+      plot.background   = ggplot2::element_rect(fill = output_background, colour = NA),
+      panel.background  = ggplot2::element_rect(fill = "white", colour = NA),
       panel.grid.minor  = ggplot2::element_blank(),
+      panel.border      = ggplot2::element_blank(),
+      axis.line         = ggplot2::element_line(colour = "#2E2E2E", linewidth = 0.4),
       axis.text         = ggplot2::element_text(colour = "#2E2E2E"),
       axis.title        = ggplot2::element_text(colour = "#2E2E2E"),
       plot.title        = ggplot2::element_text(colour = "#2E2E2E", face = "bold"),
-      legend.background = ggplot2::element_rect(fill = "#F4F1EC", colour = NA)
+      legend.background = ggplot2::element_rect(fill = output_background, colour = NA),
+      legend.key        = ggplot2::element_rect(fill = output_background, colour = NA),
+      legend.position   = "bottom"
     )
 }
 ```
@@ -366,15 +407,9 @@ ggplot2::ggplot(
   ggplot2::labs(
     x     = "Predictor variable (units)",
     y     = "Response variable (units)",
-    title = "Data only — grey points on parchment"
+    title = "Data only — grey points on a white data panel"
   ) +
-  ggplot2::theme_minimal(base_family = "sans") +
-  ggplot2::theme(
-    plot.background  = ggplot2::element_rect(fill = clr_bg, colour = NA),
-    panel.background = ggplot2::element_rect(fill = clr_bg, colour = NA),
-    panel.grid.major = ggplot2::element_line(colour = "#E0DDD8"),
-    panel.grid.minor = ggplot2::element_blank()
-  )
+  theme_biostat()
 ```
 
 ### Example: scatter + fitted model {.unnumbered}
@@ -405,15 +440,9 @@ ggplot2::ggplot(
   ggplot2::labs(
     x     = "Predictor variable (units)",
     y     = "Response variable (units)",
-    title = "Data (grey) + model (purple)"
+    title = "Grey data and purple model"
   ) +
-  ggplot2::theme_minimal(base_family = "sans") +
-  ggplot2::theme(
-    plot.background  = ggplot2::element_rect(fill = clr_bg, colour = NA),
-    panel.background = ggplot2::element_rect(fill = clr_bg, colour = NA),
-    panel.grid.major = ggplot2::element_line(colour = "#E0DDD8"),
-    panel.grid.minor = ggplot2::element_blank()
-  )
+  theme_biostat()
 ```
 
 ---

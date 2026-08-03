@@ -22,7 +22,11 @@ Published at: <https://CUNI-NATUR-Biostatistics.github.io/_brand/>
 
 ## How each lecture repo uses these files
 
-Each lecture's `R/generate_theme.R` downloads the JSON files at render time.
+Every supported lesson render entry point (`R/render_skripta.R`,
+`R/render_presentation.R`, and `R/render_all.R`) runs `R/generate_theme.R`
+before rendering. In the development workspace the generator prefers the local
+sibling `_brand` repository; elsewhere it downloads the canonical files from
+GitHub.
 The raw GitHub URLs are:
 
 ```
@@ -31,16 +35,20 @@ https://raw.githubusercontent.com/CUNI-NATUR-Biostatistics/_brand/main/quarto/fo
 https://raw.githubusercontent.com/CUNI-NATUR-Biostatistics/_brand/main/quarto/custom_theme.json
 ```
 
-If the download fails (no internet access), `generate_theme.R` falls back to the
-locally cached copies in each lecture's `theme/` folder. The JSON files in `theme/`
-should be committed to git so offline rendering always works.
+If synchronization fails (for example without internet access),
+`generate_theme.R` falls back to committed local copies and emits an explicit
+warning that the cache may be stale. It also writes
+`theme/brand_manifest.json`, whose deterministic fingerprint makes the exact
+set of synchronized inputs visible. Cached inputs and generated artifacts
+should remain committed so offline rendering works.
 
 ## Updating the theme
 
 1. Edit the JSON files in `quarto/` here.
 2. Commit and push to `main`.
-3. Every lecture repo picks up the change automatically on next render (via the
-   download step in `R/generate_theme.R`).
+3. Every lecture repo picks up the change automatically on its next supported
+   render. Direct `quarto render` calls bypass the synchronization contract and
+   should not be used for release rendering.
 4. To update the brand guidelines website, run `quarto render` from this directory
    and push the updated `docs/` folder.
 
@@ -56,7 +64,8 @@ quarto::quarto_render()
 ## Repository conventions
 
 - **This repo is public** — all content must be appropriate for public viewing.
-- JSON files in `quarto/` are the **only** files that lecture repos depend on.
-  Do not rename or restructure them without updating every lecture's
-  `R/generate_theme.R` accordingly.
+- JSON files in `quarto/`, generators under `R/Functions/Theme_generation/`,
+  render helpers under `R/`, the glossary helper, and the Lua filter are
+  canonical inputs copied into lecture repositories. Do not rename or
+  restructure them without updating `R/generate_theme.R`.
 - `docs/` is the GitHub Pages output — commit rendered output after updating guidelines.
