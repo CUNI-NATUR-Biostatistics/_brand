@@ -873,6 +873,30 @@ balance is intentional. The utility classes `.slide-margin-top-15`,
 `.slide-margin-top-25`, and `.center-vertical` are available for isolated
 elements, but normal document flow is preferred whenever possible.
 
+Use `.layout-grid-2` for two equal-width elements that should read as one comparison or prompt pair. Use `.layout-stack` for a vertical group that needs consistent breathing room in normal document flow. Add `.layout-center-y` to `.layout-stack` only when a short group should occupy the middle of the available slide body without moving its children independently.
+
+```markdown
+:::: {.layout-grid-2}
+::: {.panel-result}
+Levý panel.
+:::
+::: {.panel-question}
+Pravý panel.
+:::
+::::
+
+:::: {.layout-stack .layout-center-y}
+::: {.box-question}
+Jedna dominantní otázka.
+:::
+::: {.takeaway-strip}
+Krátká instrukce nebo závěr.
+:::
+::::
+```
+
+Both layouts use a default gap of `1.4rem`. Override it locally with `style="--layout-gap: 1rem;"` only when the rendered slide needs a different but still deliberate separation. The centred stack uses a default minimum height of `430px`; override `--layout-center-min-height` on the wrapper rather than adding transforms to individual children. These utilities organise related elements; they do not justify fitting more content onto one slide.
+
 ### Roughnotation
 
 The `quarto-roughnotation` shorthand is a live-teaching accent, not a second
