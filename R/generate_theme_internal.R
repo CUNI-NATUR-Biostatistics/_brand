@@ -74,7 +74,7 @@ message("\nDownloading brand JSON config from _brand...\n")
 brand_json_url <-
   "https://raw.githubusercontent.com/CUNI-NATUR-Biostatistics/_brand/main/quarto"
 
-for (f in c("colors.json", "fonts.json")) {
+for (f in c("colors.json", "fonts.json", "custom_theme.json")) {
   download_asset(brand_json_url, f, here::here("theme"))
 }
 
@@ -102,6 +102,7 @@ source(
 generate_skripta_typst_theme(
   colors_file = here::here("theme", "colors.json"),
   fonts_file = here::here("theme", "fonts.json"),
+  custom_theme_file = here::here("theme", "custom_theme.json"),
   output_file = here::here("obecne", "nove", "pruvodce_theme.typ")
 )
 
