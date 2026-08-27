@@ -69,3 +69,7 @@ quarto::quarto_render()
   canonical inputs copied into lecture repositories. Do not rename or
   restructure them without updating `R/generate_theme.R`.
 - `docs/` is the GitHub Pages output — commit rendered output after updating guidelines.
+
+## License
+
+Original explanatory and rendered content is licensed under CC BY 4.0, while code, styles, and generators are licensed under MIT. See [`LICENSE.md`](LICENSE.md) for the precise scope, attribution request, and third-party exclusions.
