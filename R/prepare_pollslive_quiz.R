@@ -5,6 +5,13 @@ prepare_pollslive_quiz <- function(
 ) {
   cached <- getOption("biostat.pollslive_preparation")
   if (!is.null(cached)) {
+    if (!identical(cached$mode, mode)) {
+      stop(
+        "PollsLive quiz preparation already ran in '", cached$mode,
+        "' mode in this R session; refusing to reuse it for '", mode,
+        "' mode. Start a new R session before changing POLLSLIVE_RENDER_MODE."
+      )
+    }
     return(invisible(cached))
   }
 
@@ -135,6 +142,8 @@ run_checked <- function(command, args, working_directory = NULL) {
     setwd(working_directory)
     on.exit(setwd(old_directory), add = TRUE)
   }
+  # `system2()` requires callers to quote arguments containing spaces; quote
+  # uniformly so private-repository caches also work below spaced paths.
   output <- system2(
     command = command,
     args = vapply(args, shQuote, character(1)),

@@ -43,6 +43,7 @@ render_presentation_outputs <- function() {
     args = c(
       "reveal", "--fragments=false",
       "--size", "1050x700",
+      # `system2()` requires path arguments containing spaces to be quoted.
       shQuote(static_html),
       shQuote(raw_pdf)
     )
