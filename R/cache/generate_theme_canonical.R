@@ -136,7 +136,7 @@ brand_r_url <-
   "https://raw.githubusercontent.com/CUNI-NATUR-Biostatistics/_brand/main/R"
 
 purrr::walk(
-  .x = c("render_all.R", "render_presentation.R", "render_skripta.R"),
+  .x = c("render_all.R", "render_presentation.R", "render_skripta.R", "prepare_pollslive_quiz.R"),
   .f = ~ {
     url_src <-
       paste0(brand_r_url, "/", .x)
@@ -178,6 +178,25 @@ tryCatch(
     message(
       "  WARNING: Could not download render_glossary_term.R",
       " \u2014 using cached copy.\n",
+      "  (", e$message, ")\n"
+    )
+  }
+)
+
+tryCatch(
+  expr = {
+    download.file(
+      paste0(brand_r_url, "/Functions/render_presentation_outputs.R"),
+      here::here("R", "Functions", "render_presentation_outputs.R"),
+      quiet = TRUE,
+      mode = "wb"
+    )
+    message("  Downloaded: render_presentation_outputs.R\n")
+  },
+  error = function(e) {
+    message(
+      "  WARNING: Could not download render_presentation_outputs.R",
+      " — using cached copy.\n",
       "  (", e$message, ")\n"
     )
   }

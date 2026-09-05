@@ -187,7 +187,7 @@ brand_r_local <-
   file.path(local_brand_root, "R")
 
 purrr::walk(
-  .x = c("render_all.R", "render_presentation.R", "render_skripta.R"),
+  .x = c("render_all.R", "render_presentation.R", "render_skripta.R", "prepare_pollslive_quiz.R"),
   .f = ~ {
     sync_brand_file(
       file_label = paste0("R/", .x),
@@ -209,6 +209,13 @@ sync_brand_file(
   url_src = paste0(brand_r_url, "/Functions/render_glossary_term.R"),
   path_dest = here::here("R", "Functions", "render_glossary_term.R"),
   local_src = file.path(brand_r_local, "Functions", "render_glossary_term.R")
+)
+
+sync_brand_file(
+  file_label = "R/Functions/render_presentation_outputs.R",
+  url_src = paste0(brand_r_url, "/Functions/render_presentation_outputs.R"),
+  path_dest = here::here("R", "Functions", "render_presentation_outputs.R"),
+  local_src = file.path(brand_r_local, "Functions", "render_presentation_outputs.R")
 )
 
 message("\n")
@@ -294,9 +301,11 @@ tryCatch(
           )
         ),
         "R/Functions/render_glossary_term.R",
+        "R/Functions/render_presentation_outputs.R",
         "R/render_all.R",
         "R/render_presentation.R",
-        "R/render_skripta.R"
+        "R/render_skripta.R",
+        "R/prepare_pollslive_quiz.R"
       )
     manifest_outputs <-
       c(

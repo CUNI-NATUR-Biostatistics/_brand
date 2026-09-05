@@ -27,6 +27,19 @@ Every supported lesson render entry point (`R/render_skripta.R`,
 before rendering. In the development workspace the generator prefers the local
 sibling `_brand` repository; elsewhere it downloads the canonical files from
 GitHub.
+
+Lessons that contain `pollslive/config.json` also run the version-pinned
+PollsLive preparation client before a complete presentation render. The helper
+contacts the central `_internal` workflow through authenticated `gh`; the
+PollsLive credential never leaves GitHub. It renders live HTML and a separate
+static RevealJS input for PDF, and publishes the customary output filenames
+only after both variants succeed. Set `POLLSLIVE_RENDER_MODE=offline` for a
+fully native HTML/PDF render that makes no synchronization request.
+
+Direct `quarto render` and `quarto preview` do not perform PollsLive
+synchronization. They can use the most recently verified generated include for
+authoring previews, but only `R/render_presentation.R` or `R/render_all.R`
+produces release outputs under this contract.
 The raw GitHub URLs are:
 
 ```
