@@ -212,6 +212,13 @@ sync_brand_file(
 )
 
 sync_brand_file(
+  file_label = "R/Functions/prepare_presentation_variant.R",
+  url_src = paste0(brand_r_url, "/Functions/prepare_presentation_variant.R"),
+  path_dest = here::here("R", "Functions", "prepare_presentation_variant.R"),
+  local_src = file.path(brand_r_local, "Functions", "prepare_presentation_variant.R")
+)
+
+sync_brand_file(
   file_label = "R/Functions/render_presentation_outputs.R",
   url_src = paste0(brand_r_url, "/Functions/render_presentation_outputs.R"),
   path_dest = here::here("R", "Functions", "render_presentation_outputs.R"),
@@ -301,6 +308,7 @@ tryCatch(
           )
         ),
         "R/Functions/render_glossary_term.R",
+        "R/Functions/prepare_presentation_variant.R",
         "R/Functions/render_presentation_outputs.R",
         "R/render_all.R",
         "R/render_presentation.R",
