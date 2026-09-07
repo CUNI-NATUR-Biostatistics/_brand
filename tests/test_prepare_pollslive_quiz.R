@@ -2,6 +2,7 @@
 
 source(file.path("R", "prepare_pollslive_quiz.R"))
 source(file.path("R", "Functions", "prepare_presentation_variant.R"))
+source(file.path("R", "Functions", "Theme_generation", "generate_presentation_components.R"))
 
 run_tests <- function() {
   old_cache <- getOption("biostat.pollslive_preparation")
@@ -69,6 +70,16 @@ run_tests <- function() {
       sum(grepl(paste0("/", variant, ".qmd"), output, fixed = TRUE)) == 1L
     )
   }
+
+  components_path <- tempfile(fileext = ".scss")
+  generate_presentation_components(components_path)
+  components <- paste(readLines(components_path, warn = FALSE, encoding = "UTF-8"), collapse = "\n")
+  stopifnot(
+    grepl("section.pollslive-join", components, fixed = TRUE),
+    grepl(".quiz-options ul", components, fixed = TRUE),
+    grepl(".quiz-answer", components, fixed = TRUE),
+    grepl(".pollslive-file-fallback", components, fixed = TRUE)
+  )
 }
 
 run_tests()

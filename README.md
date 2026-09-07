@@ -40,6 +40,8 @@ Direct `quarto render` and `quarto preview` do not perform PollsLive
 synchronization. They can use the most recently verified generated include for
 authoring previews, but only `R/render_presentation.R` or `R/render_all.R`
 produces release outputs under this contract.
+
+Open a rendered PollsLive presentation through `Rscript R/serve_presentation.R`. The helper serves only the standalone `Presentation/presentation.html` file on localhost and opens it in the default browser; this HTTP origin is required because remote iframes cannot load inside a presentation opened directly with a `file://` URL. Stop the server with Ctrl+C.
 The raw GitHub URLs are:
 
 ```

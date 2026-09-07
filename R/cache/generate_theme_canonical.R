@@ -136,7 +136,14 @@ brand_r_url <-
   "https://raw.githubusercontent.com/CUNI-NATUR-Biostatistics/_brand/main/R"
 
 purrr::walk(
-  .x = c("render_all.R", "render_presentation.R", "render_skripta.R", "prepare_pollslive_quiz.R"),
+  .x = c(
+    "render_all.R",
+    "render_presentation.R",
+    "render_skripta.R",
+    "prepare_pollslive_quiz.R",
+    "serve_presentation.R",
+    "serve_presentation.mjs"
+  ),
   .f = ~ {
     url_src <-
       paste0(brand_r_url, "/", .x)
