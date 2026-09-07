@@ -1,6 +1,7 @@
-# Focused regression checks for the in-session PollsLive preparation cache.
+# Focused regression checks for PollsLive preparation and render variants.
 
 source(file.path("R", "prepare_pollslive_quiz.R"))
+source(file.path("R", "Functions", "prepare_presentation_variant.R"))
 
 run_tests <- function() {
   old_cache <- getOption("biostat.pollslive_preparation")
@@ -34,6 +35,40 @@ run_tests <- function() {
     args = c("-e", "console.log(process.argv[1])", "value with spaces")
   )
   stopifnot(identical(spaced_argument, "value with spaces"))
+
+  variant_directory <- tempfile("pollslive-render-variants-")
+  dir.create(variant_directory)
+  on.exit(unlink(variant_directory, recursive = TRUE, force = TRUE), add = TRUE)
+  source_qmd <- file.path(variant_directory, "presentation.qmd")
+  writeLines(
+    c(
+      "---",
+      "format:",
+      "  revealjs:",
+      '    output-file: "presentation"',
+      "---",
+      "",
+      "{{< include ../pollslive/generated/active.qmd >}}"
+    ),
+    source_qmd,
+    useBytes = TRUE
+  )
+
+  for (variant in c("active", "static", "offline")) {
+    output_qmd <- file.path(variant_directory, paste0(".", variant, ".qmd"))
+    output_stem <- paste0(".presentation-", variant)
+    prepare_presentation_variant(
+      source_qmd = source_qmd,
+      output_qmd = output_qmd,
+      output_stem = output_stem,
+      quiz_variant = variant
+    )
+    output <- readLines(output_qmd, warn = FALSE, encoding = "UTF-8")
+    stopifnot(
+      sum(trimws(output) == paste0('output-file: "', output_stem, '"')) == 1L,
+      sum(grepl(paste0("/", variant, ".qmd"), output, fixed = TRUE)) == 1L
+    )
+  }
 }
 
 run_tests()

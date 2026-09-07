@@ -186,6 +186,25 @@ tryCatch(
 tryCatch(
   expr = {
     download.file(
+      paste0(brand_r_url, "/Functions/prepare_presentation_variant.R"),
+      here::here("R", "Functions", "prepare_presentation_variant.R"),
+      quiet = TRUE,
+      mode = "wb"
+    )
+    message("  Downloaded: prepare_presentation_variant.R\n")
+  },
+  error = function(e) {
+    message(
+      "  WARNING: Could not download prepare_presentation_variant.R",
+      " - using cached copy.\n",
+      "  (", e$message, ")\n"
+    )
+  }
+)
+
+tryCatch(
+  expr = {
+    download.file(
       paste0(brand_r_url, "/Functions/render_presentation_outputs.R"),
       here::here("R", "Functions", "render_presentation_outputs.R"),
       quiet = TRUE,
