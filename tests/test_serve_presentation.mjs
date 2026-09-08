@@ -19,6 +19,11 @@ test("presenter server exposes only the standalone presentation", async () => {
     assert.equal(presentation.status, 200);
     assert.equal(await presentation.text(), "<!doctype html><title>Deck</title>");
     assert.equal(presentation.headers.get("cache-control"), "no-store");
+
+    await writeFile(htmlPath, "<!doctype html><title>Updated deck</title>", "utf8");
+    const updated = await fetch(url);
+    assert.equal(updated.status, 200);
+    assert.equal(await updated.text(), "<!doctype html><title>Updated deck</title>");
     const missing = await fetch(new URL("/private.txt", url));
     assert.equal(missing.status, 404);
   } finally {
