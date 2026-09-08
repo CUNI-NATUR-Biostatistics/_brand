@@ -10,11 +10,12 @@ export async function startPresentationServer({
   port = 8765,
   openBrowser = true
 } = {}) {
-  const html = await readFile(htmlPath);
-  const server = createServer((request, response) => {
+  await readFile(htmlPath);
+  const server = createServer(async (request, response) => {
     const pathname = new URL(request.url ?? "/", "http://localhost").pathname;
     if (request.method === "GET" || request.method === "HEAD") {
       if (pathname === "/" || pathname === "/presentation.html") {
+        const html = await readFile(htmlPath);
         response.writeHead(200, {
           "Content-Type": "text/html; charset=utf-8",
           "Cache-Control": "no-store"
