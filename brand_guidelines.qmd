@@ -92,6 +92,32 @@ not a preference. The only exceptions are:
 
 ---
 
+## Course Logo
+
+The course logo joins three parts of the course identity: a leaf represents ecology, bars represent observed data, and the rising line represents statistical analysis and inference. The canonical editable masters and web exports live in [`assets/logo/`](assets/logo/); downstream websites synchronize these files rather than maintaining independent source artwork.
+
+### Variants
+
+| Variant | Preview | Use |
+| --- | --- | --- |
+| Full-colour icon | ![Full-colour course icon](assets/logo/biostatistika-icon.svg){width=120px} | Default compact mark on white, cream, or another quiet light background |
+| Reversed icon | ![Reversed course icon](assets/logo/biostatistika-icon-reversed.svg){width=120px} | Purple navigation bars, dark backgrounds, and compact website branding |
+| Monochrome icon | ![Monochrome course icon](assets/logo/biostatistika-icon-monochrome.svg){width=120px} | One-colour printing or contexts where the course palette is unavailable |
+| Horizontal lockup | ![Horizontal Biostatistika logo](assets/logo/biostatistika-logo-horizontal.svg){width=520px} | Wide headers, website mastheads, and landscape documents |
+| Vertical lockup | ![Vertical Biostatistika logo](assets/logo/biostatistika-logo-vertical.svg){width=220px} | Narrow layouts, title pages, and portrait documents |
+
+### Clear space and minimum size
+
+Keep clear space around every edge of the mark equal to at least the diameter of one gold point on the data line. Do not place text, rules, photographs, or another logo inside that area. The normal minimum size is 15 mm in print or 120 px on screen; browser favicons and compact navigation marks are the deliberate exceptions.
+
+### Background and alteration rules
+
+Use the full-colour mark on white, cream, or a quiet light neutral background. Use the reversed mark on deep purple or another sufficiently dark, visually quiet background. Use the monochrome version only when colour reproduction is unavailable. Do not recolour, distort, rotate, crop, separate, or rearrange the components, and do not place the full-colour version on gold, saturated green, or another background that weakens contrast.
+
+The SVG files are the canonical editable masters, traced directly from the approved board artwork so its geometry, proportions, and lettering are preserved rather than redrawn. The matching PNG files are convenience exports for web and office-document use. The approved design board is retained at [`assets/logo/source/approved-logo-board.png`](assets/logo/source/approved-logo-board.png) as the visual provenance record.
+
+---
+
 ## Core Design Philosophy
 
 The visual system encodes **epistemic roles**:

@@ -6,7 +6,10 @@ project:
 
 website:
   title: "Biostatistika — Brand Guidelines"
+  favicon: assets/logo/biostatistika-icon.svg
   navbar:
+    logo: assets/logo/biostatistika-icon-reversed.svg
+    logo-alt: "Biostatistika course logo"
     left:
       - href: brand_guidelines.qmd
         text: Guidelines
@@ -23,6 +26,9 @@ format:
     toc-title: "Contents"
     number-sections: true
     embed-resources: false
-    theme: [flatly, theme/brand_theme.scss]
+    theme:
+      - flatly
+      - theme/brand_theme.scss
+      - assets/logo/logo-site.scss
     highlight-style: github
     include-in-header: "theme/fonts-include.html"

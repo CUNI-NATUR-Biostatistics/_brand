@@ -10,6 +10,7 @@ This repository is designed to be maintained in the `CUNI-NATUR-Biostatistics` m
 
 ## Contents
 
+- [`assets/logo/`](assets/logo/) — canonical SVG masters, PNG exports, approved design board, and logo usage notes
 - [`quarto/`](quarto/) — canonical JSON configuration files for all Quarto and R themes
   - [`colors.json`](quarto/colors.json) — colour palette (8 primary + 15 semantic entries)
   - [`fonts.json`](quarto/fonts.json) — typography (families, sizes per context, weights)
@@ -48,6 +49,9 @@ The raw GitHub URLs are:
 https://raw.githubusercontent.com/CUNI-NATUR-Biostatistics/_brand/main/quarto/colors.json
 https://raw.githubusercontent.com/CUNI-NATUR-Biostatistics/_brand/main/quarto/fonts.json
 https://raw.githubusercontent.com/CUNI-NATUR-Biostatistics/_brand/main/quarto/custom_theme.json
+https://raw.githubusercontent.com/CUNI-NATUR-Biostatistics/_brand/main/assets/logo/biostatistika-icon.svg
+https://raw.githubusercontent.com/CUNI-NATUR-Biostatistics/_brand/main/assets/logo/biostatistika-icon-reversed.svg
+https://raw.githubusercontent.com/CUNI-NATUR-Biostatistics/_brand/main/assets/logo/biostatistika-logo-horizontal.svg
 ```
 
 If synchronization fails (for example without internet access),
