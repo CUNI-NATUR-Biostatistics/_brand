@@ -259,6 +259,68 @@ sync_brand_file(
   local_src = file.path(local_brand_root, "lua", "semantic-boxes.lua")
 )
 
+sync_brand_file(
+  file_label = "theme/course-logo-reversed.svg",
+  url_src = paste0(
+    "https://raw.githubusercontent.com/",
+    "CUNI-NATUR-Biostatistics/_brand/main/",
+    "assets/logo/biostatistika-icon-reversed.svg"
+  ),
+  path_dest = here::here("theme", "course-logo-reversed.svg"),
+  local_src = file.path(
+    local_brand_root,
+    "assets",
+    "logo",
+    "biostatistika-icon-reversed.svg"
+  )
+)
+
+logo_sources <- c(
+  "course-logo-horizontal.svg" = "biostatistika-logo-horizontal.svg",
+  "course-icon.svg" = "biostatistika-icon.svg",
+  "skripta-favicon.html" = "skripta-favicon.html"
+)
+for (destination_name in names(logo_sources)) {
+  logo_file <- logo_sources[[destination_name]]
+  sync_brand_file(
+    file_label = paste0("theme/", destination_name),
+    url_src = paste0(
+      "https://raw.githubusercontent.com/",
+      "CUNI-NATUR-Biostatistics/_brand/main/",
+      "assets/logo/", logo_file
+    ),
+    path_dest = here::here("theme", destination_name),
+    local_src = file.path(local_brand_root, "assets", "logo", logo_file)
+  )
+}
+
+sync_brand_file(
+  file_label = "Learning_materials/course-logo-vertical.svg",
+  url_src = paste0(
+    "https://raw.githubusercontent.com/",
+    "CUNI-NATUR-Biostatistics/_brand/main/",
+    "assets/logo/biostatistika-logo-vertical.svg"
+  ),
+  path_dest = here::here("Learning_materials", "course-logo-vertical.svg"),
+  local_src = file.path(
+    local_brand_root,
+    "assets",
+    "logo",
+    "biostatistika-logo-vertical.svg"
+  )
+)
+
+sync_brand_file(
+  file_label = "Learning_materials/skripta-logo.typ",
+  url_src = paste0(
+    "https://raw.githubusercontent.com/",
+    "CUNI-NATUR-Biostatistics/_brand/main/",
+    "assets/logo/skripta-logo.typ"
+  ),
+  path_dest = here::here("Learning_materials", "skripta-logo.typ"),
+  local_src = file.path(local_brand_root, "assets", "logo", "skripta-logo.typ")
+)
+
 message("\n")
 
 # Source helper functions -----
@@ -301,6 +363,12 @@ tryCatch(
         "theme/custom_theme.json",
         "theme/rn-shorthand.lua",
         "theme/semantic-boxes.lua",
+        "theme/course-logo-reversed.svg",
+        "theme/course-logo-horizontal.svg",
+        "theme/course-icon.svg",
+        "theme/skripta-favicon.html",
+        "Learning_materials/course-logo-vertical.svg",
+        "Learning_materials/skripta-logo.typ",
         "R/cache/generate_theme_canonical.R",
         paste0(
           "R/Functions/Theme_generation/",

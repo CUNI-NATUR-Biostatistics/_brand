@@ -12,6 +12,8 @@ This directory is the canonical source for the Biostatistika (MB120P163) course 
 | `biostatistika-logo-horizontal.svg` / `.png` | Wide headers, website mastheads, and landscape documents |
 | `biostatistika-logo-vertical.svg` / `.png` | Narrow layouts, title pages, and portrait documents |
 | `source/approved-logo-board.png` | Approved design board retained as the visual provenance record for Issue #4 |
+| `skripta-favicon.html` | Shared HTML include that installs the full-colour icon as the learning-material favicon |
+| `skripta-logo.typ` | Shared Typst include that places the vertical logo on the first PDF page |
 
 SVG files are the editable masters traced directly from the approved board artwork. PNG files are web and office-document exports generated from those masters at their native dimensions. The paths preserve the geometry, proportions, and lettering of the approved artwork. Small raster specks, antialiasing halos, and jagged edges were removed during vector cleanup; the source board remains the reference for any further refinement.
 
