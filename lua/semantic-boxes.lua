@@ -80,6 +80,28 @@ local function parse_boolean(value)
   return nil
 end
 
+local function is_typst_output()
+  return quarto ~= nil and quarto.doc ~= nil and quarto.doc.is_format("typst")
+end
+
+-- Typst has no tabs: Quarto's fallback prints every tab one after another and
+-- turns each tab title into a numbered heading in the table of contents.
+-- Quarto parses `.panel-tabset` into a custom Tabset node before user filters
+-- run, so handle that node and replace the tab titles with bold labels.
+function Tabset(tabset)
+  if not is_typst_output() then
+    return nil
+  end
+
+  local blocks = pandoc.Blocks({})
+  for i = 1, #tabset.tabs do
+    local tab = tabset.tabs[i]
+    blocks:insert(pandoc.Para({ pandoc.Strong(quarto.utils.as_inlines(tab.title)) }))
+    blocks:extend(quarto.utils.as_blocks(tab.content))
+  end
+  return blocks
+end
+
 function Div(div)
   local callout_type = semantic_type(div)
   if callout_type == nil then
